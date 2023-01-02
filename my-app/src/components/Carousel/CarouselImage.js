@@ -5,7 +5,7 @@ import Container from "@mui/material/Container";
 
 function CarouselImage(props) {
   return (
-    <Paper sx={{ paddingTop: "6%", boxShadow: "0" }}>
+    <Paper sx={{ paddingTop: "1rem", boxShadow: "0" }}>
       <Container maxWidth="xl" sx={{ bgcolor: "#eaece5" }}>
         <Box
           component="img"
