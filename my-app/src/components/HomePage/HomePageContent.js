@@ -3,6 +3,7 @@ import MyCarousel from "../Carousel/Carousel";
 import { Container } from "@mui/system";
 import Header from "./Header";
 import CategorySection from "../Category/CategorySection";
+import Footer from "./Footer";
 
 function HomePageContent() {
   return (
@@ -11,6 +12,7 @@ function HomePageContent() {
         <Header></Header>
         <MyCarousel></MyCarousel>
         <CategorySection></CategorySection>
+        <Footer></Footer>
       </Container>
     </>
   );
