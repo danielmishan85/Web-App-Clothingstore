@@ -55,14 +55,13 @@ const Footer = () => {
           <Row>
             <Column>
               <FooterLink>
-                <FlightTakeoffIcon
+                <GppGoodIcon
                   sx={{ fontSize: "35px", color: "black" }}
-                ></FlightTakeoffIcon>
-                <Row>FREE SHIPPING ALL ORDERS</Row>
+                ></GppGoodIcon>
+                <Row> SECURE PAYMENT</Row>
               </FooterLink>
             </Column>
-
-            <Column>
+            <Column style={{ fontFamily: "monospace" }}>
               <FooterLink>
                 <FlightTakeoffIcon
                   sx={{
@@ -74,7 +73,7 @@ const Footer = () => {
               </FooterLink>
             </Column>
 
-            <Column>
+            <Column style={{ fontFamily: "monospace" }}>
               <FooterLink>
                 <SellIcon sx={{ fontSize: "35px", color: "black" }}></SellIcon>
                 <Row>BEST PRICES</Row>
