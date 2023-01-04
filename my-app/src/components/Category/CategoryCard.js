@@ -12,6 +12,7 @@ export default function CategoryCard(props) {
       sx={{
         bgcolor: "#eaece5",
         maxWidth: 300,
+
         ...props.sx,
       }}
     >
@@ -19,12 +20,12 @@ export default function CategoryCard(props) {
         component="img"
         height="450"
         width="300"
-        image={props.item.src}
-        alt={props.item.alt}
+        image={props.item.img}
+        alt={props.item.category}
       />
       <CardContent>
         <Typography component="div" letterSpacing={4} variant="h5">
-          {props.item.Title}
+          {props.item.title}
         </Typography>
       </CardContent>
     </Card>
