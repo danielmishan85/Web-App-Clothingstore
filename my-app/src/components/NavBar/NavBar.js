@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar.css';
+import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
@@ -22,8 +23,11 @@ const NavBar = () => {
     <header className="Navbar">
       <nav>
         <ul>
+        <li>
+            <Link to='/'><HomeIcon sx={{ fontSize: "40px"}} className='homeIcon'></HomeIcon></Link>
+          </li>
           <li>
-            <Link to='/signin'><PersonIcon sx={{ fontSize: "40px"}} className='personIcon'></PersonIcon></Link>
+            <Link to='/signin'><PersonIcon sx={{ fontSize: "40px"}}  className='personIcon'></PersonIcon></Link>
           </li>
           <li>
             <Link to='/cart'><ShoppingCartIcon sx={{ fontSize: "40px"}} className='cartIcon'></ShoppingCartIcon></Link>

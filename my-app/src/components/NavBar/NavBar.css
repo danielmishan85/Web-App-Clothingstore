@@ -28,7 +28,7 @@ body {
 }
 
 .Navbar nav {
-  margin-left: 100rem;
+  margin-left: 95rem;
 }
 
 .Navbar ul {
@@ -41,6 +41,11 @@ body {
 
 .Navbar li {
   margin-left: 3rem;
+}
+
+.homeIcon{
+  color: black;
+  font-size: large;
 }
 
 .personIcon{
