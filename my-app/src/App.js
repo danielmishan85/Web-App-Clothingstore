@@ -7,6 +7,8 @@ import CategoryItems from "./components/Card/CategoryItems";
 import ProductPage from "./components/Products/ProductPage";
 import SigninPage from "./components/Profile/SigninPage";
 import SignUpPage from "./components/Profile/SignupPage";
+import ForgotPasswordPage from './components/Profile/ForgotPasswordPage'
+
 
 
 function App() {
@@ -17,6 +19,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/signin" element={<SigninPage/>} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/passwordReset" element={<ForgotPasswordPage />} />
         <Route
           path="/:title"
           element={<CategoryItems categoryItems={products} />}

@@ -4,6 +4,7 @@ import './NavBar.css';
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import TextField from '@mui/material/TextField';
 
 const NavBar = () => {
   // return (
@@ -21,6 +22,7 @@ const NavBar = () => {
   // );
   return <div>
     <header className="Navbar">
+      <TextField sx={{mx: 3}}className='inputlabal'></TextField>
       <nav>
         <ul>
         <li>
