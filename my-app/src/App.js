@@ -7,12 +7,16 @@ import products from "./data";
 import CategoryItems from "./components/Card/CategoryItems";
 import ProductCard from "./components/Products/ProductCard";
 import ProductPage from "./components/Products/ProductPage";
+import SigninPage from "./components/Profile/SigninPage";
+import SignUpPage from "./components/Profile/SignupPage";
 function App() {
   return (
     <Router>
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/signin" element={<SigninPage/>} />
+        <Route path="/signup" element={<SignUpPage />} />
         <Route
           path="/:title"
           element={<CategoryItems categoryItems={products} />}
