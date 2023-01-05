@@ -5,7 +5,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CategoryCard from "./components/Category/CategoryCard";
 import products from "./data";
 import CategoryItems from "./components/Card/CategoryItems";
-
+import ProductCard from "./components/Products/ProductCard";
+import ProductPage from "./components/Products/ProductPage";
 function App() {
   return (
     <Router>
@@ -15,6 +16,10 @@ function App() {
         <Route
           path="/:title"
           element={<CategoryItems categoryItems={products} />}
+        />
+        <Route
+          path="/products/:productId"
+          element={<ProductPage products={products} />}
         />
       </Routes>
     </Router>

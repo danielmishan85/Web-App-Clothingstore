@@ -44,11 +44,11 @@ function CategoryItems(props) {
                 maxWidth: 300,
               }}
             >
-              <Link to={"/${item.title}"}>
+              <Link to={`/products/${item.id}`}>
                 <CategoryCard sx={{ margin: "auto" }} key={i} item={item} />{" "}
               </Link>
               <Typography sx={{ fontSize: 20 }}>{item.product}</Typography>
-              <Typography sx={{ fontSize: 18 }}>{item.price}$</Typography>
+              <Typography sx={{ fontSize: 18 }}>${item.price}</Typography>
             </Card>
           </Grid>
         ))}
