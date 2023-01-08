@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const productsRoutes = require('./routes/products');
 const userRoutes = require('./routes/users');
@@ -11,6 +12,17 @@ const server = express();
 mongoose.set('strictQuery', true);
 
 server.use(bodyParser.json());
+server.use(cors());
+
+server.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*'); //every port can send
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
+  next();
+});
 
 server.use('/api/products', productsRoutes);
 server.use('/api/users', userRoutes);

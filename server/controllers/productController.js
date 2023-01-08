@@ -1,87 +1,123 @@
 const HttpError = require('../models/http-error');
+const { validationResult } = require('express-validator');
 
-let DUMMY_DATA = [
-  {
-    id: 'p1',
-    productName: 'T-shirt',
-    price: '20$',
-    color: 'black',
-    image: '',
-    description: '',
-  },
-  {
-    id: 'p2',
-    productName: 'T-shirt',
-    price: '20$',
-    color: 'white',
-    image: '',
-    description: '',
-  },
-  {
-    id: 'p3',
-    productName: 'T-shirt',
-    price: '20$',
-    color: 'gray',
-    image: '',
-    description: '',
-  },
-];
+const Product = require('../models/product');
 
-const getAllProducts = (req, res) => {
-  res.json({ DUMMY_DATA });
+const getAllProducts = async (req, res, next) => {
+  let products;
+  try {
+    products = await Product.find({}, 'name category image color price description');
+  } catch (err) {
+    return next(
+      new HttpError('Fatching users failed, please try again later.', 500)
+    );
+  }
+  res.json({
+    products: products.map((product) => product.toObject({ getters: true })),
+  });
 };
 
-const getProductById = (req, res, next) => {
-  const productId = req.params.pid;
-  const product = DUMMY_DATA.find((p) => {
-    return p.id === productId;
-  });
+const getProductById = async (req, res, next) => {
+  const prodactId = req.params.pid;
+  let product;
+  try {
+    product = await Product.findById(prodactId);
+  } catch (err) {
+    return next(new HttpError(
+      'Something went wrong, could not find a product.',
+      500
+    ));
+  }
+
   if (!product) {
     return next(
       new HttpError('Could not find a product for the provided id.', 404)
     );
   }
-  res.json({ product });
+
+  res.json({ product: product.toObject({ getters: true }) });
 };
 
-const createProduct = (req, res, next) => {
-  const { id, name, type, price, color, image, description } = req.body;
-  const createdProduct = {
-    id,
+
+const createProduct = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(
+      new HttpError('Invalid inputs passed, please check your data.', 422)
+    );
+  }
+
+  const { name, category, image, color, price, description } = req.body;
+
+  const createdProduct = new Product({
     name,
-    type,
-    price,
-    color,
+    category,
     image,
+    color,
+    price,
     description,
-  };
-  DUMMY_DATA.push(createdProduct);
-  res.status(201).json({ product: createdProduct });
+  });
+
+  try {
+    await createdProduct.save();
+  } catch (err) {
+    return next(
+      new HttpError('Creating product failed, please try again.', 500)
+    );
+  }
+
+  res.status(201).json({ product: createdProduct.toObject({ getters: true }) });
 };
 
-const updateProduct = (req, res, next) => {
-  const { name, type, price, color, image, description } = req.body;
+const updateProduct = async (req, res, next) => {
+  const { name, category, image, color, price, description } = req.body;
   const productId = req.params.pid;
 
-  const updatedProduct = { ...DUMMY_DATA.find((p) => p.id === productId) };
-  const productIndex = DUMMY_DATA.findIndex((p) => p.id === productId);
-  updatedProduct.name = name;
-  updatedProduct.type = type;
-  updatedProduct.price = price;
-  updatedProduct.color = color;
-  updatedProduct.image = image;
-  updatedProduct.description = description;
+  let product;
+  try {
+    product = await Product.findById(productId);
+  } catch (err) {
+    return next(
+      new HttpError('Something went wrong, could not update product', 500)
+    );
+  }
 
-  DUMMY_DATA[productIndex] = updatedProduct;
+  product.name = name;
+  product.category = category;
+  product.image = image;
+  product.color = color;
+  product.price = price;
+  product.description = description;
 
-  res.status(200).json({ product: updatedProduct });
+  try {
+    await product.save();
+  } catch (err) {
+    return next(
+      new HttpError('Something went wrong, could not update product', 500)
+    );
+  }
+
+  res.status(200).json({ product: product.toObject({ getters: true }) });
 };
 
-const deleteProduct = (req, res, next) => {
+const deleteProduct = async (req, res, next) => {
   const productId = req.params.pid;
-  DUMMY_DATA = DUMMY_DATA.filter((p) => p.id !== productId);
-
-  res.status(200).json({ message: 'Deleted product!' });
+  let product;
+  try {
+    product = await Product.findById(productId);
+  } catch (err) {
+    return next(
+      new HttpError('Something went wrong, could not delete product', 500)
+    );
+  }
+  try {
+    await product.remove();
+  } catch (err) {
+    return next(
+      new HttpError('Something went wrong, could not delete product', 500)
+    );
+  }
+  res.status(200).json({ message: 'Deleted product.' });
 };
 
 exports.getAllProducts = getAllProducts;

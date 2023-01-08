@@ -1,4 +1,5 @@
 const express = require('express');
+const { check } = require('express-validator');
 
 const controller = require('../controllers//userController');
 
@@ -8,11 +9,21 @@ router.get('/', controller.getAllUsers);
 
 router.get('/:uid', controller.getUserById);
 
-router.post('/', controller.createUser);
+router.post(
+  '/signup',
+  [
+    check('name').not().isEmpty(),
+    check('email').not().isEmpty(),
+    check('password').not().isEmpty(),
+  ],
+  controller.signup
+);
 
-router.post('/signup', controller.signup);
-
-router.post('/login', controller.login);
+router.post(
+  '/login',
+  [check('email').not().isEmpty(), check('password').not().isEmpty()],
+  controller.login
+);
 
 router.patch('/:uid', controller.updateUser);
 
