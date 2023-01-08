@@ -45,10 +45,11 @@ const getProductById = (req, res, next) => {
 };
 
 const createProduct = (req, res, next) => {
-  const { id, productName, price, color, image, description } = req.body;
+  const { id, name, type, price, color, image, description } = req.body;
   const createdProduct = {
     id,
-    productName,
+    name,
+    type,
     price,
     color,
     image,
@@ -59,12 +60,13 @@ const createProduct = (req, res, next) => {
 };
 
 const updateProduct = (req, res, next) => {
-  const { productName, price, color, image, description } = req.body;
+  const { name, type, price, color, image, description } = req.body;
   const productId = req.params.pid;
 
   const updatedProduct = { ...DUMMY_DATA.find((p) => p.id === productId) };
   const productIndex = DUMMY_DATA.findIndex((p) => p.id === productId);
-  updatedProduct.productName = productName;
+  updatedProduct.name = name;
+  updatedProduct.type = type;
   updatedProduct.price = price;
   updatedProduct.color = color;
   updatedProduct.image = image;

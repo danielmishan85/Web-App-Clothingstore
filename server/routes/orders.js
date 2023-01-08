@@ -8,6 +8,8 @@ router.get('/', controller.getAllOrders);
 
 router.get('/:oid', controller.getOrderById);
 
+router.get('/user/:uid', controller.getOrdersByUserId);
+
 router.post('/', controller.createOrder);
 
 router.patch('/:oid', controller.updateOrder);

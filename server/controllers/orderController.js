@@ -3,8 +3,9 @@ const HttpError = require('../models/http-error');
 let DUMMY_DATA = [
   {
     id: 'o1',
-    totalPrice: 'T-shirt',
     products: [],
+    totalPrice: 'T-shirt',
+    date: '',
     creator: 'u1',
   },
 ];
@@ -25,6 +26,22 @@ const getOrderById = (req, res, next) => {
     );
   }
   res.json({ order });
+};
+
+const getOrdersByUserId = (req, res, next) => {
+  const userId = req.params.uid;
+
+  const orders = DUMMY_DATA.filter((o) => {
+    return o.creator === userId;
+  });
+
+  if (!orders || orders.length === 0) {
+    return next(
+      new HttpError('Could not find orders for the provided user id.', 404)
+    );
+  }
+
+  res.json({ orders });
 };
 
 const createOrder = (req, res, next) => {
@@ -63,6 +80,7 @@ const deleteOrder = (req, res, next) => {
 
 exports.getAllOrders = getAllOrders;
 exports.getOrderById = getOrderById;
+exports.getOrdersByUserId = getOrdersByUserId;
 exports.createOrder = createOrder;
 exports.updateOrder = updateOrder;
 exports.deleteOrder = deleteOrder;

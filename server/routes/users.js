@@ -10,6 +10,10 @@ router.get('/:uid', controller.getUserById);
 
 router.post('/', controller.createUser);
 
+router.post('/signup', controller.signup);
+
+router.post('/login', controller.login);
+
 router.patch('/:uid', controller.updateUser);
 
 router.delete('/:uid', controller.deleteUser);

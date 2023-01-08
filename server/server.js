@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const productsRoutes = require('./routes/products');
 const userRoutes = require('./routes/users');
@@ -7,6 +8,7 @@ const orderRoutes = require('./routes/orders');
 const HttpError = require('./models/http-error');
 
 const server = express();
+mongoose.set('strictQuery', true);
 
 server.use(bodyParser.json());
 
@@ -26,4 +28,11 @@ server.use((error, req, res, next) => {
   res.json({ message: error.message || 'An unknown error occurred!' });
 });
 
-server.listen(5000);
+mongoose
+  .connect(
+    'mongodb+srv://Danielmishan:Danielush7598@cluster0.cwwwndg.mongodb.net/clothingStore?retryWrites=true&w=majority'
+  )
+  .then(() => {
+    server.listen(5000, () => console.log('connected to db'));
+  })
+  .catch((err) => console.log(err));
