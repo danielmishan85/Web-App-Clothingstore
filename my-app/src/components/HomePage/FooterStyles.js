@@ -29,6 +29,7 @@ export const Column = styled.div`
 export const ColIcon = styled.div`
   display: grid;
   padding-left: 40rem;
+  display: flex;
 `;
 export const AboutUsCol = styled.div`
   display: grid;

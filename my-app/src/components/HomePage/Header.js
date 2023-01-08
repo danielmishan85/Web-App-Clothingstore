@@ -3,7 +3,7 @@ import { Container, Heading } from "./HeaderStyles";
 function Header() {
   return (
     <Container>
-      <Heading>
+      <Heading style={{ borderBottom: "2px solid black" }}>
         <img src={Headerphoto} />
       </Heading>
     </Container>

@@ -1,10 +1,11 @@
 import React from "react";
 import EmailIcon from "@mui/icons-material/Email";
-import GppGoodIcon from "@mui/icons-material/GppGood";
+//import GppGoodIcon from "@mui/icons-material/GppGood";
 import PhoneIcon from "@mui/icons-material/Phone";
-import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
-import SellIcon from "@mui/icons-material/Sell";
-import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
+//import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
+//import SellIcon from "@mui/icons-material/Sell";
+//import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
+import { Card, Grid } from "@mui/material";
 import {
   Box,
   Container,
@@ -15,6 +16,8 @@ import {
   AboutUsCol,
   ColIcon,
 } from "./FooterStyles.js";
+import Header from "./Header.js";
+import ProductPageIcons from "../Products/ProductPageIcon.js";
 
 const Footer = () => {
   return (
@@ -22,73 +25,55 @@ const Footer = () => {
       <Box>
         <Container>
           <Row>
+            <Grid
+              sx={{
+                backgroundColor: "inherit",
+                paddingTop: 0,
+              }}
+            >
+              <Column>
+                <AboutUsCol>
+                  <FooterLink href="/aboutus">
+                    <Heading style={{ fontSize: "35px", paddingTop: 5 }}>
+                      ABOUT US{" "}
+                    </Heading>
+                  </FooterLink>{" "}
+                  <FooterLink style={{ fontSize: "20px", paddingBottom: "5%" }}>
+                    An online clothing store containing international brands.
+                    Worldwide deliveries are available.
+                  </FooterLink>
+                </AboutUsCol>
+              </Column>
+            </Grid>
             <Column>
-              <AboutUsCol>
-                <FooterLink href="/aboutus">
-                  <Heading style={{ fontSize: "35px" }}>ABOUT US </Heading>
-                </FooterLink>{" "}
-                <FooterLink style={{ fontSize: "20px" }}>
-                  An online clothing store containing international brands.
-                  Worldwide deliveries are available.
-                </FooterLink>
-              </AboutUsCol>
-            </Column>
+              {" "}
+              <Grid
+                container
+                spacing={0}
+                columns={12}
+                marginRight="10%"
+                alignItems="center"
+                justify="center"
+                mt="120px"
+              >
+                <PhoneIcon
+                  sx={{ fontSize: "40px", color: "black", mx: 6 }}
+                ></PhoneIcon>
 
-            <Column>
-              <ColIcon>
-                <FooterLink href="#">
-                  <PhoneIcon
-                    sx={{ fontSize: "40px", color: "black" }}
-                  ></PhoneIcon>
-                  Contact Us
-                </FooterLink>
-                <FooterLink href="#">
-                  <EmailIcon
-                    sx={{ fontSize: "40px", color: "black" }}
-                  ></EmailIcon>
-                  Our Mail
-                </FooterLink>
-              </ColIcon>{" "}
+                <EmailIcon
+                  sx={{ fontSize: "40px", color: "black" }}
+                ></EmailIcon>
+              </Grid>
+              <ProductPageIcons />
             </Column>
           </Row>
 
-          <Row>
-            <Column>
-              <FooterLink>
-                <GppGoodIcon
-                  sx={{ fontSize: "35px", color: "black" }}
-                ></GppGoodIcon>
-                <Row> SECURE PAYMENT</Row>
-              </FooterLink>
-            </Column>
-            <Column style={{ fontFamily: "monospace" }}>
-              <FooterLink>
-                <FlightTakeoffIcon
-                  sx={{
-                    fontSize: "35px",
-                    color: "black",
-                  }}
-                ></FlightTakeoffIcon>
-                <Row>FREE SHIPPING ALL ORDERS</Row>
-              </FooterLink>
-            </Column>
-
-            <Column style={{ fontFamily: "monospace" }}>
-              <FooterLink>
-                <SellIcon sx={{ fontSize: "35px", color: "black" }}></SellIcon>
-                <Row>BEST PRICES</Row>
-              </FooterLink>
-            </Column>
-          </Row>
-        </Container>
-
-        <Container>
           <div
             style={{
               textAlign: "center",
               fontSize: "15px",
               color: "black",
-              background: "white",
+              padding: 10,
             }}
           >
             Clothing Store &copy;2023

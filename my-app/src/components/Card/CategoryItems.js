@@ -2,10 +2,13 @@ import * as React from "react";
 import Grid from "@mui/material/Grid";
 import { Form, Link, useParams } from "react-router-dom";
 import CategoryCard from "../Category/CategoryCard";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
+//import CardContent from "@mui/material/CardContent";
+//import CardMedia from "@mui/material/CardMedia";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
+//import products from "../../data";
+//import Header from "../HomePage/Header";
+//import TitleDivider from "../Ui/TitleDivider";
 
 function CategoryItems(props) {
   const categoryTitle = useParams().title;
@@ -15,7 +18,7 @@ function CategoryItems(props) {
   );
 
   return (
-    <section>
+    <div>
       <Grid
         columns={24}
         sx={{
@@ -38,13 +41,17 @@ function CategoryItems(props) {
               padding: "20px",
             }}
           >
+            {" "}
             <Card
               sx={{
                 bgcolor: "#eaece5",
                 maxWidth: 300,
               }}
             >
-              <Link to={`/products/${item.id}`}>
+              <Link
+                style={{ textDecoration: "none" }}
+                to={`/products/${item.id}`}
+              >
                 <CategoryCard sx={{ margin: "auto" }} key={i} item={item} />{" "}
               </Link>
               <Typography sx={{ fontSize: 20 }}>{item.product}</Typography>
@@ -53,7 +60,7 @@ function CategoryItems(props) {
           </Grid>
         ))}
       </Grid>
-    </section>
+    </div>
   );
 }
 export default CategoryItems;
