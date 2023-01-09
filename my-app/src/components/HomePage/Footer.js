@@ -1,11 +1,7 @@
 import React from "react";
 import EmailIcon from "@mui/icons-material/Email";
-//import GppGoodIcon from "@mui/icons-material/GppGood";
 import PhoneIcon from "@mui/icons-material/Phone";
-//import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
-//import SellIcon from "@mui/icons-material/Sell";
-//import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
-import { Card, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import {
   Box,
   Container,
@@ -14,9 +10,7 @@ import {
   FooterLink,
   Heading,
   AboutUsCol,
-  ColIcon,
 } from "./FooterStyles.js";
-import Header from "./Header.js";
 import ProductPageIcons from "../Products/ProductPageIcon.js";
 
 const Footer = () => {

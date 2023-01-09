@@ -12,12 +12,14 @@ router.get('/:pid', controller.getProductById);
 router.post(
   '/',
   [
-    check('name').not().isEmpty(),
+    check('title').not().isEmpty(),
     check('category').not().isEmpty(),
-    check('image').not().isEmpty(),
-    check('color').not().isEmpty(),
+    check('type').not().isEmpty(),
+    check('productName').not().isEmpty(),
     check('price').not().isEmpty(),
-    check('description').not().isEmpty(),
+    check('img').not().isEmpty(),
+    check('imgList').not().isEmpty(),
+    check('desc').not().isEmpty(),
   ],
   controller.createProduct
 );

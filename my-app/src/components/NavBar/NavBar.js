@@ -7,19 +7,6 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import TextField from '@mui/material/TextField';
 
 const NavBar = () => {
-  // return (
-  //   <div>
-  //     <header className="Navbar">
-  //       <div className="ToolBar">
-  //         <div className="ShoppingCartIcon">
-  //           <ShoppingCartIcon
-  //             sx={{ fontSize: "40px", color: "black", mx: 225, pt: 3 }}
-  //           ></ShoppingCartIcon>
-  //         </div>
-  //       </div>
-  //     </header>
-  //   </div>
-  // );
   return <div>
     <header className="Navbar">
       <TextField sx={{mx: 3}}className='inputlabal'></TextField>

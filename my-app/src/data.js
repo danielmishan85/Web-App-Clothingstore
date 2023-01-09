@@ -4,7 +4,7 @@ const products = [
     title: "ISABEL MARANT",
     category: "ISABELMARANT",
     type: "jacket",
-    product: "Silver Jacket",
+    productName: "Silver Jacket",
     price: 200,
     img: "https://www.factory54.co.il/on/demandware.static/-/Sites-master-catalog/default/dw7c4b06d3/images/large/850171750_P_1.png",
     imgList: [
@@ -19,7 +19,7 @@ const products = [
     title: "ISABEL MARANT",
     category: "ISABELMARANT",
     type: "jacket",
-    product: "Jeans Jacket",
+    productName: "Jeans Jacket",
     price: 250,
     img: "https://www.factory54.co.il/dw/image/v2/BFLR_PRD/on/demandware.static/-/Sites-master-catalog/default/dw81f22ea9/images/large/850171769_P_1.png?sw=298&sh=447",
     imgList: [
@@ -34,7 +34,7 @@ const products = [
     title: "ISABEL MARANT",
     category: "ISABELMARANT",
     type: "shirt",
-    product: "White T-shirt",
+    productName: "White T-shirt",
     price: 150,
     img: "https://www.factory54.co.il/on/demandware.static/-/Sites-master-catalog/default/dwf46e83d6/images/large/850171766_P_1.png",
     imgList: [
@@ -49,7 +49,7 @@ const products = [
     title: "ISABEL MARANT",
     category: "ISABELMARANT",
     type: "jeans",
-    product: "Jeans",
+    productName: "Jeans",
     price: 300,
     img: "https://www.factory54.co.il/dw/image/v2/BFLR_PRD/on/demandware.static/-/Sites-master-catalog/default/dwa811673e/images/large/850171697_P_1.png?sw=298&sh=447",
     imgList: [
@@ -64,7 +64,7 @@ const products = [
     title: "ISABEL MARANT",
     category: "ISABELMARANT",
     type: "jacket",
-    product: "Grey Jacket",
+    productName: "Grey Jacket",
     price: 200,
     img: "https://www.factory54.co.il/dw/image/v2/BFLR_PRD/on/demandware.static/-/Sites-master-catalog/default/dwa7a3fd52/images/large/850171539_P_1.png?sw=298&sh=447",
     imgList: [
@@ -79,7 +79,7 @@ const products = [
     title: "ISABEL MARANT",
     category: "ISABELMARANT",
     type: "shirt",
-    product: "Orange T-shirt",
+    productName: "Orange T-shirt",
     price: 150,
     img: "https://www.factory54.co.il/dw/image/v2/BFLR_PRD/on/demandware.static/-/Sites-master-catalog/default/dwd7b4cf5e/images/large/850171765_P_1.png?sw=298&sh=447",
     imgList: [
@@ -94,7 +94,7 @@ const products = [
     title: "ISABEL MARANT",
     category: "ISABELMARANT",
     type: "jeans",
-    product: "Jeans",
+    productName: "Jeans",
     price: 300,
     img: "https://www.factory54.co.il/dw/image/v2/BFLR_PRD/on/demandware.static/-/Sites-master-catalog/default/dw663fdeb3/images/large/850171603_P_1.png?sw=298&sh=447",
     imgList: [
@@ -109,7 +109,7 @@ const products = [
     title: "ISABEL MARANT",
     category: "ISABELMARANT",
     type: "shirt",
-    product: "White Shirt",
+    productName: "White Shirt",
     price: 250,
     img: "https://www.factory54.co.il/dw/image/v2/BFLR_PRD/on/demandware.static/-/Sites-master-catalog/default/dwd4e7d7a3/images/large/850171558_P_1.png?sw=298&sh=447",
     imgList: [
@@ -124,7 +124,7 @@ const products = [
     title: "LEVIS",
     category: "LEVIS",
     type: "jeans",
-    product: "Jeans",
+    productName: "Jeans",
     price: 250,
     img: "https://www.factory54.co.il/dw/image/v2/BFLR_PRD/on/demandware.static/-/Sites-master-catalog/default/dwca1160be/images/large/550046402_P_1.png?sw=298&sh=447",
     imgList: [
@@ -139,7 +139,7 @@ const products = [
     title: "LEVIS",
     category: "LEVIS",
     type: "jeans",
-    product: "Jeans",
+    productName: "Jeans",
     price: 250,
     img: "https://www.factory54.co.il/dw/image/v2/BFLR_PRD/on/demandware.static/-/Sites-master-catalog/default/dwf2c832db/images/large/550045811_P_1.png?sw=298&sh=447",
     imgList: [
@@ -154,7 +154,7 @@ const products = [
     title: "LEVIS",
     category: "LEVIS",
     type: "jeans",
-    product: "Jeans",
+    productName: "Jeans",
     price: 250,
     img: "https://www.factory54.co.il/dw/image/v2/BFLR_PRD/on/demandware.static/-/Sites-master-catalog/default/dw1666f478/images/large/550045638_P_1.png?sw=298&sh=447",
     imgList: [
@@ -169,7 +169,7 @@ const products = [
     title: "LEVIS",
     category: "LEVIS",
     type: "jeans",
-    product: "Jeans",
+    productName: "Jeans",
     price: 250,
     img: "https://www.factory54.co.il/dw/image/v2/BFLR_PRD/on/demandware.static/-/Sites-master-catalog/default/dwe0a67bd9/images/large/550045909_P_1.png?sw=298&sh=447",
     imgList: [
@@ -184,7 +184,7 @@ const products = [
     title: "LEVIS",
     category: "LEVIS",
     type: "jacket",
-    product: "Jacket",
+    productName: "Jacket",
     price: 200,
     img: "https://www.factory54.co.il/dw/image/v2/BFLR_PRD/on/demandware.static/-/Sites-master-catalog/default/dwea7ba8c7/images/large/550046555_P_1.png?sw=298&sh=447",
     imgList: [
@@ -199,7 +199,7 @@ const products = [
     title: "LEVIS",
     category: "LEVIS",
     type: "jacket",
-    product: "Jacket",
+    productName: "Jacket",
     price: 200,
     img: "https://www.factory54.co.il/dw/image/v2/BFLR_PRD/on/demandware.static/-/Sites-master-catalog/default/dw25706b3d/images/large/550045525_P_1.png?sw=298&sh=447",
     imgList: [
@@ -214,7 +214,7 @@ const products = [
     title: "LEVIS",
     category: "LEVIS",
     type: "jacket",
-    product: "Jacket",
+    productName: "Jacket",
     price: 200,
     img: "https://www.factory54.co.il/dw/image/v2/BFLR_PRD/on/demandware.static/-/Sites-master-catalog/default/dw25706b3d/images/large/550045525_P_1.png?sw=298&sh=447",
     imgList: [

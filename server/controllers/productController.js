@@ -6,10 +6,13 @@ const Product = require('../models/product');
 const getAllProducts = async (req, res, next) => {
   let products;
   try {
-    products = await Product.find({}, 'name category image color price description');
+    products = await Product.find(
+      {},
+      'title category type productName price img imgList desc'
+    );
   } catch (err) {
     return next(
-      new HttpError('Fatching users failed, please try again later.', 500)
+      new HttpError('Fatching products failed, please try again later.', 500)
     );
   }
   res.json({
@@ -23,10 +26,9 @@ const getProductById = async (req, res, next) => {
   try {
     product = await Product.findById(prodactId);
   } catch (err) {
-    return next(new HttpError(
-      'Something went wrong, could not find a product.',
-      500
-    ));
+    return next(
+      new HttpError('Something went wrong, could not find a product.', 500)
+    );
   }
 
   if (!product) {
@@ -38,7 +40,6 @@ const getProductById = async (req, res, next) => {
   res.json({ product: product.toObject({ getters: true }) });
 };
 
-
 const createProduct = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -47,15 +48,18 @@ const createProduct = async (req, res, next) => {
     );
   }
 
-  const { name, category, image, color, price, description } = req.body;
+  const { title, category, type, productName, price, img, imgList, desc } =
+    req.body;
 
   const createdProduct = new Product({
-    name,
+    title,
     category,
-    image,
-    color,
+    type,
+    productName,
     price,
-    description,
+    img,
+    imgList,
+    desc,
   });
 
   try {
@@ -70,7 +74,8 @@ const createProduct = async (req, res, next) => {
 };
 
 const updateProduct = async (req, res, next) => {
-  const { name, category, image, color, price, description } = req.body;
+  const { title, category, type, productName, price, img, imgList, desc } =
+    req.body;
   const productId = req.params.pid;
 
   let product;
@@ -82,12 +87,14 @@ const updateProduct = async (req, res, next) => {
     );
   }
 
-  product.name = name;
+  product.title = title;
   product.category = category;
-  product.image = image;
-  product.color = color;
+  product.type = type;
+  product.productName = productName;
   product.price = price;
-  product.description = description;
+  product.img = img;
+  product.imgList = imgList;
+  product.desc = desc;
 
   try {
     await product.save();

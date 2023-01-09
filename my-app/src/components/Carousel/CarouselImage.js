@@ -1,4 +1,3 @@
-import { Padding } from "@mui/icons-material";
 import { Paper } from "@mui/material";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
