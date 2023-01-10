@@ -92,6 +92,33 @@ const updateUser = async (req, res, next) => {
   res.status(200).json({ user: user.toObject({ getters: true }) });
 };
 
+const resetPassword = async (req, res, next) => {
+  const { email, password } = req.body;
+
+  let user;
+  try {
+    user = await User.findOne({ email: email });
+  } catch (err) {
+    return next(
+      new HttpError('Something went wrong, could not find this user', 500)
+    );
+  }
+
+ 
+
+  user.password = password;
+
+  try {
+    await user.save();
+  } catch (err) {
+    return next(
+      new HttpError('Something went wrong, could not reset password', 500)
+    );
+  }
+
+  res.status(200).json({ user: user.toObject({ getters: true }) });
+};
+
 const deleteUser = async (req, res, next) => {
   const userId = req.params.uid;
   let user;
@@ -183,4 +210,5 @@ exports.getUserById = getUserById;
 exports.signup = signup;
 exports.login = login;
 exports.updateUser = updateUser;
+exports.resetPassword = resetPassword;
 exports.deleteUser = deleteUser;

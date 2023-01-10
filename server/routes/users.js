@@ -28,6 +28,8 @@ router.post(
 
 router.patch('/:uid', controller.updateUser);
 
+router.patch('/', controller.resetPassword);
+
 router.delete('/:uid', controller.deleteUser);
 
 module.exports = router;
