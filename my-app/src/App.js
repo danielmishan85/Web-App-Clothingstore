@@ -2,15 +2,29 @@ import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import HomePage from './components/HomePage/HomePageContent';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import products from './data';
+//import products from './data';
 import CategoryItems from './components/Card/CategoryItems';
 import ProductPage from './components/Products/ProductPage';
 import SigninPage from './components/Profile/SigninPage';
 import SignUpPage from './components/Profile/SignupPage';
 import ForgotPasswordPage from './components/Profile/ForgotPasswordPage';
 import React from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [products, setProducts] = useState([]);
+
+  const sendRequest = () => {
+    fetch('http://localhost:5000/api/products')
+      .then((res) => (res.ok ? res.json() : { products: '' }))
+      .then((data) => {
+        setProducts(data.products);
+      });
+  };
+  useEffect(() => {
+    sendRequest();
+  }, []);
+
   return (
     <Router>
       <NavBar />
