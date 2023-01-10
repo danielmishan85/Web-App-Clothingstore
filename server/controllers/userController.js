@@ -16,7 +16,10 @@ let DUMMY_DATA = [
 const getAllUsers = async (req, res, next) => {
   let users;
   try {
-    users = await User.find({}, 'name email password ordersList');
+    users = await User.find(
+      {},
+      'firstName lastName email password getSpam type logedIn ordersList'
+    );
   } catch (err) {
     return next(
       new HttpError('Fatching users failed, please try again later.', 500)
@@ -48,7 +51,16 @@ const getUserById = async (req, res, next) => {
 };
 
 const updateUser = async (req, res, next) => {
-  const { name, email, password, ordersList } = req.body;
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    getSpam,
+    type,
+    logedIn,
+    ordersList,
+  } = req.body;
   const userId = req.params.uid;
 
   let user;
@@ -60,9 +72,13 @@ const updateUser = async (req, res, next) => {
     );
   }
 
-  user.name = name;
+  user.firstName = firstName;
+  user.lastName = lastName;
   user.email = email;
   user.password = password;
+  user.getSpam = getSpam;
+  user.type = type;
+  user.logedIn = logedIn;
   user.ordersList = ordersList;
 
   try {
@@ -104,7 +120,7 @@ const signup = async (req, res, next) => {
     );
   }
 
-  const { name, email, password } = req.body;
+  const { firstName, lastName, email, password, getSpam } = req.body;
 
   let existingUser;
   try {
@@ -122,9 +138,13 @@ const signup = async (req, res, next) => {
   }
 
   const createdUser = new User({
-    name,
+    firstName,
+    lastName,
     email,
     password,
+    getSpam,
+    type: 'customer',
+    logedIn: false,
     ordersList: [],
   });
 
@@ -149,10 +169,11 @@ const login = async (req, res, next) => {
     );
   }
 
-  if(!existingUser || existingUser.password !== password) {
-    return next(new HttpError('Invalid credentials, could not log you in', 401))
+  if (!existingUser || existingUser.password !== password) {
+    return next(
+      new HttpError('Invalid credentials, could not log you in', 401)
+    );
   }
-
 
   res.json({ message: 'Logged in!' });
 };
