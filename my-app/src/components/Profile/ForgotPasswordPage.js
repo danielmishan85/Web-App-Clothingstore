@@ -71,7 +71,7 @@ export default function ForgotPasswordPage() {
                   required
                   fullWidth
                   name='password'
-                  label='Password'
+                  label='New Password'
                   type='password'
                   id='password'
                   autoComplete='new-password'
@@ -84,7 +84,7 @@ export default function ForgotPasswordPage() {
               variant='contained'
               sx={{ mt: 3, mb: 2, bgcolor: 'black' }}
             >
-              Password Reset
+              Reset
             </Button>
             <Grid container justifyContent='flex-end'>
             </Grid>

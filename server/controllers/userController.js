@@ -120,7 +120,7 @@ const signup = async (req, res, next) => {
     );
   }
 
-  const { firstName, lastName, email, password, getSpam } = req.body;
+  const { firstName, lastName, email, password } = req.body;
 
   let existingUser;
   try {
@@ -142,7 +142,7 @@ const signup = async (req, res, next) => {
     lastName,
     email,
     password,
-    getSpam,
+    getSpam: false,
     type: 'customer',
     logedIn: false,
     ordersList: [],
