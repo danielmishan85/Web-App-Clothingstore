@@ -17,7 +17,7 @@ const theme = createTheme();
 function ProductPage(props) {
   const id = useParams().productId;
 
-  const product = props.products.find((p) => p.id === parseInt(id));
+  const product = props.products.find((p) => p.id === id);
 
   return (
     <Container maxWidth='xxxl'>

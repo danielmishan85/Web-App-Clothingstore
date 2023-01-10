@@ -3,16 +3,6 @@ const { validationResult } = require('express-validator');
 
 const User = require('../models/user');
 
-let DUMMY_DATA = [
-  {
-    id: 'u1',
-    name: 'Daniella',
-    email: 'test@test.com',
-    password: 'black',
-    ordersList: [],
-  },
-];
-
 const getAllUsers = async (req, res, next) => {
   let users;
   try {
@@ -103,8 +93,6 @@ const resetPassword = async (req, res, next) => {
       new HttpError('Something went wrong, could not find this user', 500)
     );
   }
-
- 
 
   user.password = password;
 
