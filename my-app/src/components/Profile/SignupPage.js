@@ -46,6 +46,20 @@ export default function SignUpPage() {
       email: data.get('email'),
       password: data.get('password'),
     };
+    const user = {
+      email: data.get('email'),
+      password: data.get('password'),
+    }
+    fetch(
+      'https://online-store-37733-default-rtdb.firebaseio.com/users.json',
+      {
+        method: 'POST',
+        body: JSON.stringify(user),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    ).catch((err) => console.error(err));
     console.log(userData)
     fetch('http://localhost:5000/api/users/signup', {
       method: 'POST',
@@ -55,7 +69,7 @@ export default function SignUpPage() {
         'Content-Type': 'application/json',
       },
     })
-      .then((res) => {
+      .then(() => {
         history('/signin');
       })
       .catch((err) => console.error(err));
