@@ -10,6 +10,7 @@ import SignUpPage from './components/Profile/SignupPage';
 import ForgotPasswordPage from './components/Profile/ForgotPasswordPage';
 import React from 'react';
 import { useEffect, useState } from 'react';
+import CategoryPage from './components/Category/CategoryPage';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -40,6 +41,10 @@ function App() {
         <Route
           path='/products/:productId'
           element={<ProductPage products={products} />}
+        />
+        <Route
+          path='/categories'
+          element={<CategoryPage categories={products} />}
         />
       </Routes>
     </Router>
