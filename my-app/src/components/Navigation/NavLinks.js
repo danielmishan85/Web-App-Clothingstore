@@ -22,7 +22,7 @@ const NavLinks = props => {
       </li>
       
         <li>
-          <NavLink to='/profile'>
+          <NavLink to={`/users/id`}>
             <AccountCircleIcon sx={{ fontSize: '50px' }} />
           </NavLink>
         </li>
