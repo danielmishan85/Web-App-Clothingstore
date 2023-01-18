@@ -11,7 +11,7 @@ import {
   Heading,
   AboutUsCol,
 } from "./FooterStyles.js";
-import ProductPageIcons from "../Products/ProductPageIcon.js";
+import ProductPageIcons from "../Product/ProductIcons";
 
 const Footer = () => {
   return (
