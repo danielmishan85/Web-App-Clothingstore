@@ -12,6 +12,40 @@ import ForgotPassword from './pages/ForgotPassword';
 import MainNavBar from './components/Navigation/MainNavigation';
 import { AuthContext } from './components/context/auth-context';
 
+const users = [
+  {
+    id: 'u1',
+    firstName: 'Daniella',
+    lastName: 'Mishan',
+    email: 'Danielmishan85@gmail.com',
+    password: '1234556',
+    role: 'customer',
+    ordersList: [
+      {
+        products: [],
+        totalPrice: 1500,
+        date: '1/2/2022',
+        creator: 'u1',
+      },
+      {
+        products: [],
+        totalPrice: 1000,
+        date: '28/2/2022',
+        creator: 'u1',
+      },
+    ],
+  },
+  {
+    id: '2',
+    firstName: 'Talia',
+    lastName: 'Ohana',
+    email: 'Taloh1503@gmail.com',
+    password: '1234556',
+    role: 'admin',
+    ordersList: [],
+  },
+];
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [products, setProducts] = useState([]);
@@ -33,22 +67,22 @@ function App() {
   const login = useCallback(() => {
     setIsLoggedIn(true);
     console.log(isLoggedIn);
-  }, []);
+  }, [isLoggedIn]);
 
   const logout = useCallback(() => {
     setIsLoggedIn(false);
     console.log(isLoggedIn);
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <AuthContext.Provider
       value={{ isLoggedin: isLoggedIn, login: login, logout: logout }}
     >
       <Router>
-        <MainNavBar />
+        <MainNavBar users={users} />
         <Routes>
           <Route path='/' exact element={<Home />} />
-          <Route path='/profile' element={<User />} />
+          <Route path='/users/:userId' element={<User users={users} />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/passwordReset' element={<ForgotPassword />} />
