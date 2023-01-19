@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
 import User from './pages/User';
+import Admin from './pages/Admin'
 import Categories from './pages/Categories';
 import Category from './pages/Category';
 import Product from './pages/Product';
@@ -36,7 +37,7 @@ const users = [
     ],
   },
   {
-    id: '2',
+    id: 'u2',
     firstName: 'Talia',
     lastName: 'Ohana',
     email: 'Taloh1503@gmail.com',
@@ -53,7 +54,7 @@ function App() {
   console.log(isLoggedIn);
   console.log(auth.isLoggedIn);
 
-  const sendRequest = () => {
+  const getData = () => {
     fetch('http://localhost:5000/api/products')
       .then((res) => (res.ok ? res.json() : { products: '' }))
       .then((data) => {
@@ -61,7 +62,7 @@ function App() {
       });
   };
   useEffect(() => {
-    sendRequest();
+    getData();
   }, []);
 
   const login = useCallback(() => {
@@ -83,6 +84,7 @@ function App() {
         <Routes>
           <Route path='/' exact element={<Home />} />
           <Route path='/users/:userId' element={<User users={users} />} />
+          <Route path='/users/admin/:userId/' element={<Admin users={users} />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/passwordReset' element={<ForgotPassword />} />
