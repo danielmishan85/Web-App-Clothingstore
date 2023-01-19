@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
 import User from './pages/User';
-import Admin from './pages/Admin'
+import Admin from './pages/Admin';
 import Categories from './pages/Categories';
 import Category from './pages/Category';
 import Product from './pages/Product';
@@ -13,46 +13,38 @@ import ForgotPassword from './pages/ForgotPassword';
 import MainNavBar from './components/Navigation/MainNavigation';
 import { AuthContext } from './components/context/auth-context';
 
-const users = [
-  {
-    id: 'u1',
-    firstName: 'Daniella',
-    lastName: 'Mishan',
-    email: 'Danielmishan85@gmail.com',
-    password: '1234556',
-    role: 'customer',
-    ordersList: [
-      {
-        products: [],
-        totalPrice: 1500,
-        date: '1/2/2022',
-        creator: 'u1',
-      },
-      {
-        products: [],
-        totalPrice: 1000,
-        date: '28/2/2022',
-        creator: 'u1',
-      },
-    ],
-  },
-  {
-    id: 'u2',
-    firstName: 'Talia',
-    lastName: 'Ohana',
-    email: 'Taloh1503@gmail.com',
-    password: '1234556',
-    role: 'admin',
-    ordersList: [],
-  },
-];
+// const users = [
+//   {
+//     id: 'u1',
+//     firstName: 'Daniella',
+//     lastName: 'Mishan',
+//     email: 'Danielmishan85@gmail.com',
+//     password: '1234556',
+//     role: 'customer',
+//     ordersList: [
+//       {
+//         products: [],
+//         totalPrice: 1500,
+//         date: '1/2/2022',
+//         creator: 'u1',
+//       },
+//       {
+//         products: [],
+//         totalPrice: 1000,
+//         date: '28/2/2022',
+//         creator: 'u1',
+//       },
+//     ],
+//   },
+// ];
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [products, setProducts] = useState([]);
-  const auth = useContext(AuthContext);
-  console.log(isLoggedIn);
-  console.log(auth.isLoggedIn);
+  const [users, setUsers] = useState([]);
+  // const auth = useContext(AuthContext);
+  // console.log(isLoggedIn);
+  // console.log(auth.isLoggedIn);
 
   const getData = () => {
     fetch('http://localhost:5000/api/products')
@@ -64,6 +56,18 @@ function App() {
   useEffect(() => {
     getData();
   }, []);
+
+  const getUsers = () => {
+    fetch('http://localhost:5000/api/users')
+      .then((res) => (res.ok ? res.json() : { users: '' }))
+      .then((data) => {
+        setUsers(data.users);
+      });
+  };
+  useEffect(() => {
+    getUsers();
+  }, []);
+  console.log(users);
 
   const login = useCallback(() => {
     setIsLoggedIn(true);
@@ -83,8 +87,11 @@ function App() {
         <MainNavBar users={users} />
         <Routes>
           <Route path='/' exact element={<Home />} />
-          <Route path='/users/:userId' element={<User users={users} />} />
-          <Route path='/users/admin/:userId/' element={<Admin users={users} />} />
+          <Route path='/users/:userId' element={<User />} />
+          <Route
+            path='/users/admin/:userId/'
+            element={<Admin users={users} />}
+          />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/passwordReset' element={<ForgotPassword />} />

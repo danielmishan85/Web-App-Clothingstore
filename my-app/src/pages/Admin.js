@@ -12,7 +12,7 @@ const Admin = (props) => {
         <br />
         <br />
         <h1>Admin Screen</h1>
-        <AdminDetails users={users}></AdminDetails>
+        <AdminDetails ></AdminDetails>
         <UsersList users={users}></UsersList>
       </div>
     );

@@ -2,8 +2,7 @@ import React from 'react';
 
 import UserDetails from '../components/User/UserDetails';
 
-const User = (props) => {
-  const users = props.users;
+const User = () => {
 
   return (
     <div>
@@ -11,7 +10,7 @@ const User = (props) => {
       <br />
       <br />
       <h1>My Profile</h1>
-      <UserDetails users={users}></UserDetails>
+      <UserDetails ></UserDetails>
     </div>
   );
 };

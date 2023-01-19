@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -11,9 +11,20 @@ import UserOrders from './UserOrders';
 
 export default function UserDetails(props) {
   const [showOrders, setShowOrders] = useState(false);
+  const [user, setUser] = useState([]);
+
   const id = useParams().userId;
 
-  const user = props.users.find((u) => u.id === id);
+  const getUser = () => {
+    fetch(`http://localhost:5000/api/users/${id}`)
+      .then((res) => (res.ok ? res.json() : { user: '' }))
+      .then((data) => {
+        setUser(data.user);
+      });
+  };
+  useEffect(() => {
+    getUser();
+  }, []);
 
   const showOrdersHandler = () => {
     setShowOrders(true);
