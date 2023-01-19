@@ -6,9 +6,11 @@ const cors = require('cors');
 const productsRoutes = require('./routes/products');
 const userRoutes = require('./routes/users');
 const orderRoutes = require('./routes/orders');
+const socketRoutes = require('./routes/socketUser')
 const HttpError = require('./models/http-error');
 
 const server = express();
+const http = require('http').Server(server);
 mongoose.set('strictQuery', true);
 
 server.use(bodyParser.json());
@@ -27,6 +29,19 @@ server.use((req, res, next) => {
 server.use('/api/products', productsRoutes);
 server.use('/api/users', userRoutes);
 server.use('/api/orders', orderRoutes);
+
+const io = require('socket.io')(http, {
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST'],
+  },
+});
+
+io.on('connection', (socket) => {
+  socket.on('GET_USERS', socketRoutes.GetUsers(io, socket));
+  // socket.on('EDIT_USER', EditUser(io, socket));
+  // socket.on('DELETE_USER', DeleteUser(io, socket));
+});
 
 server.use((req, res, next) => {
   return next(new HttpError('Could not find this route.', 404));
