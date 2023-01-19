@@ -8,7 +8,7 @@ const getAllUsers = async (req, res, next) => {
   try {
     users = await User.find(
       {},
-      'firstName lastName email password getSpam type logedIn ordersList'
+      'firstName lastName email password role ordersList'
     );
   } catch (err) {
     return next(
@@ -46,9 +46,7 @@ const updateUser = async (req, res, next) => {
     lastName,
     email,
     password,
-    getSpam,
-    type,
-    logedIn,
+    role,
     ordersList,
   } = req.body;
   const userId = req.params.uid;
@@ -66,9 +64,7 @@ const updateUser = async (req, res, next) => {
   user.lastName = lastName;
   user.email = email;
   user.password = password;
-  user.getSpam = getSpam;
-  user.type = type;
-  user.logedIn = logedIn;
+  user.role = role;
   user.ordersList = ordersList;
 
   try {
@@ -157,9 +153,7 @@ const signup = async (req, res, next) => {
     lastName,
     email,
     password,
-    getSpam: false,
-    type: 'customer',
-    logedIn: false,
+    role: 'customer',
     ordersList: [],
   });
 
