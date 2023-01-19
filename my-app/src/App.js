@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useContext } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
@@ -57,17 +57,16 @@ function App() {
     getData();
   }, []);
 
-  const getUsers = () => {
-    fetch('http://localhost:5000/api/users')
-      .then((res) => (res.ok ? res.json() : { users: '' }))
-      .then((data) => {
-        setUsers(data.users);
-      });
-  };
-  useEffect(() => {
-    getUsers();
-  }, []);
-  console.log(users);
+  // const getUsers = () => {
+  //   fetch('http://localhost:5000/api/users')
+  //     .then((res) => (res.ok ? res.json() : { users: '' }))
+  //     .then((data) => {
+  //       setUsers(data.users);
+  //     });
+  // };
+  // useEffect(() => {
+  //   getUsers();
+  // }, []);
 
   const login = useCallback(() => {
     setIsLoggedIn(true);
@@ -84,13 +83,13 @@ function App() {
       value={{ isLoggedin: isLoggedIn, login: login, logout: logout }}
     >
       <Router>
-        <MainNavBar users={users} />
+        <MainNavBar />
         <Routes>
           <Route path='/' exact element={<Home />} />
           <Route path='/users/:userId' element={<User />} />
           <Route
             path='/users/admin/:userId/'
-            element={<Admin users={users} />}
+            element={<Admin />}
           />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<SignUp />} />
