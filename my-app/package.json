@@ -8,6 +8,7 @@
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.4",
     "@mui/system": "^5.11.4",
+    "firebase": "^9.16.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-material-ui-carousel": "^3.4.2",
