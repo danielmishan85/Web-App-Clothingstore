@@ -1,9 +1,12 @@
-const express = require('express');
+const userController = require('../controllers/socketController');
 
-const userController = require('../controllers/socketController')
 
-const router = express.Router();
+const GetUsers = (io, socket) => async () => {
+  const res = await userController.getUser();
+  console.log(res.success)
+  res.error
+    ? socket.emit('getUsers_error', res.error)
+    : socket.emit('getUsers_success', res.success);
+};
 
-router.get('/', userController.getUsers);
-
-module.exports = router;
+exports.GetUsers = GetUsers;
