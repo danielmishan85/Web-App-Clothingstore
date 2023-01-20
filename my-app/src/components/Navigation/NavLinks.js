@@ -6,12 +6,11 @@ import LoginIcon from '@mui/icons-material/Login';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-import { AuthContext } from '../context/auth-context';
+import { AuthContext } from '../../context/auth-context';
 import './NavLinks.css';
 
-const NavLinks = props => {
+const NavLinks = (props) => {
   const auth = useContext(AuthContext);
-  console.log(auth.isLoggedIn)
 
   return (
     <ul className='nav-links'>
@@ -20,26 +19,30 @@ const NavLinks = props => {
           <HomeIcon sx={{ fontSize: '50px' }} />
         </NavLink>
       </li>
-      
+
+      {auth.isLoggedIn && (
         <li>
-          <NavLink to={`/users/admin/id`}>
+          <NavLink to={`/users/admin/${auth.userId}`}>
             <AccountCircleIcon sx={{ fontSize: '50px' }} />
           </NavLink>
         </li>
-      
-    
+      )}
+
+      {!auth.isLoggedIn && (
         <li>
           <NavLink to='/login'>
-            <LoginIcon sx={{ fontSize: '50px' }} />
+            <AccountCircleIcon sx={{ fontSize: '50px' }} />
           </NavLink>
         </li>
-      
+      )}
+
       <li>
         <NavLink to='/cart'>
           <ShoppingCartIcon sx={{ fontSize: '50px' }} />
         </NavLink>
       </li>
- 
+
+      {auth.isLoggedIn && (
         <li>
           <button
             style={{
@@ -50,7 +53,7 @@ const NavLinks = props => {
             <LogoutIcon sx={{ fontSize: '50px' }} />
           </button>
         </li>
-      
+      )}
     </ul>
   );
 };

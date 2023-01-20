@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import TextField from '@mui/material/TextField';
-import SearchIcon from '@mui/icons-material/Search';
-import { InputAdornment } from '@mui/material';
+// import TextField from '@mui/material/TextField';
+// import SearchIcon from '@mui/icons-material/Search';
+// import { InputAdornment } from '@mui/material';
 
 import MainHeader from './MainHeader';
 import NavLinks from './NavLinks';
@@ -39,7 +39,7 @@ const MainNavigation = props => {
           <span />
         </button>
         <h1 className='main-navigation__title'>
-          <TextField
+          {/* <TextField
             sx={{ mx: 3 }}
             className='inputlabal'
             InputProps={{
@@ -49,7 +49,7 @@ const MainNavigation = props => {
                 </InputAdornment>
               ),
             }}
-          ></TextField>
+          ></TextField> */}
         </h1>
         <nav className="main-navigation__header-nav">
           <NavLinks />

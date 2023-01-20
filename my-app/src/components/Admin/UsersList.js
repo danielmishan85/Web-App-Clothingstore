@@ -52,6 +52,9 @@ export default function UserDetails(props) {
                       <Typography sx={{ fontSize: 18 }}>
                         Email: {item.email}
                       </Typography>
+                      <Typography sx={{ fontSize: 18 }}>
+                        Role: {item.role}
+                      </Typography>
                     </CardContent>
                     <CardActions>
                       <Button size='small'>Edit</Button>

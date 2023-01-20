@@ -11,7 +11,7 @@ import Login from './pages/Login';
 import SignUp from './pages/Signup';
 import ForgotPassword from './pages/ForgotPassword';
 import MainNavBar from './components/Navigation/MainNavigation';
-import { AuthContext } from './components/context/auth-context';
+import { AuthContext } from './context/auth-context';
 
 // const users = [
 //   {
@@ -41,10 +41,7 @@ import { AuthContext } from './components/context/auth-context';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [products, setProducts] = useState([]);
-  const [users, setUsers] = useState([]);
-  // const auth = useContext(AuthContext);
-  // console.log(isLoggedIn);
-  // console.log(auth.isLoggedIn);
+  const [userId, setUserId] = useState('id');
 
   const getData = () => {
     fetch('http://localhost:5000/api/products')
@@ -57,30 +54,21 @@ function App() {
     getData();
   }, []);
 
-  // const getUsers = () => {
-  //   fetch('http://localhost:5000/api/users')
-  //     .then((res) => (res.ok ? res.json() : { users: '' }))
-  //     .then((data) => {
-  //       setUsers(data.users);
-  //     });
-  // };
-  // useEffect(() => {
-  //   getUsers();
-  // }, []);
-
   const login = useCallback(() => {
     setIsLoggedIn(true);
-    console.log(isLoggedIn);
   }, [isLoggedIn]);
 
   const logout = useCallback(() => {
     setIsLoggedIn(false);
-    console.log(isLoggedIn);
+  }, [isLoggedIn]);
+
+  const setId = useCallback((id) => {
+    setUserId(id);
   }, [isLoggedIn]);
 
   return (
     <AuthContext.Provider
-      value={{ isLoggedin: isLoggedIn, login: login, logout: logout }}
+      value={{ isLoggedIn: isLoggedIn, login: login, logout: logout, userId: userId, setId: setId }}
     >
       <Router>
         <MainNavBar />

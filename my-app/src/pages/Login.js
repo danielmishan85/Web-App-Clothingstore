@@ -13,7 +13,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 
-import { AuthContext } from '../components/context/auth-context';
+import { AuthContext } from '../context/auth-context';
 
 function Copyright(props) {
   return (
@@ -37,7 +37,6 @@ const theme = createTheme();
 
 export default function Login() {
   const auth = useContext(AuthContext);
-  console.log(auth.isLoggedIn);
 
   const handleSubmit = (event) => {
     event.preventDefault();
