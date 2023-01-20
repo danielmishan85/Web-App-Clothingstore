@@ -37,11 +37,20 @@ const io = require('socket.io')(http, {
   },
 });
 
-io.on('connection', (socket) => {
-  socket.on('GET_USERS', socketRoutes.GetUsers(io, socket));
+io.on('connection',  async (socket) => {
+  socket.on('GET_USERS', await socketRoutes.GetUsers(io, socket));
+  
   // socket.on('EDIT_USER', EditUser(io, socket));
   // socket.on('DELETE_USER', DeleteUser(io, socket));
 });
+
+// io.on('connection', (socket) => {
+//   activeUserCount++;
+//   socket.on('disconnect', () => {
+//     activeUserCount--;
+//   });
+// });
+
 
 server.use((req, res, next) => {
   return next(new HttpError('Could not find this route.', 404));
@@ -60,6 +69,6 @@ mongoose
     'mongodb+srv://Danielmishan:Danielush7598@cluster0.cwwwndg.mongodb.net/clothingStore?retryWrites=true&w=majority'
   )
   .then(() => {
-    server.listen(5000, () => console.log('connected to db'));
+    http.listen(5000, () => console.log('connected to db'));
   })
   .catch((err) => console.log(err));
