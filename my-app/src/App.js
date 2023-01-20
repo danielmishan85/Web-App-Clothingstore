@@ -13,35 +13,9 @@ import ForgotPassword from './pages/ForgotPassword';
 import MainNavBar from './components/Navigation/MainNavigation';
 import { AuthContext } from './context/auth-context';
 
-// const users = [
-//   {
-//     id: 'u1',
-//     firstName: 'Daniella',
-//     lastName: 'Mishan',
-//     email: 'Danielmishan85@gmail.com',
-//     password: '1234556',
-//     role: 'customer',
-//     ordersList: [
-//       {
-//         products: [],
-//         totalPrice: 1500,
-//         date: '1/2/2022',
-//         creator: 'u1',
-//       },
-//       {
-//         products: [],
-//         totalPrice: 1000,
-//         date: '28/2/2022',
-//         creator: 'u1',
-//       },
-//     ],
-//   },
-// ];
-
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [products, setProducts] = useState([]);
-  const [userId, setUserId] = useState('id');
 
   const getData = () => {
     fetch('http://localhost:5000/api/products')
@@ -62,23 +36,20 @@ function App() {
     setIsLoggedIn(false);
   }, [isLoggedIn]);
 
-  const setId = useCallback((id) => {
-    setUserId(id);
-  }, [isLoggedIn]);
-
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn: isLoggedIn, login: login, logout: logout, userId: userId, setId: setId }}
+      value={{
+        isLoggedIn: isLoggedIn,
+        login: login,
+        logout: logout,
+      }}
     >
       <Router>
         <MainNavBar />
         <Routes>
           <Route path='/' exact element={<Home />} />
-          <Route path='/users/:userId' element={<User />} />
-          <Route
-            path='/users/admin/:userId/'
-            element={<Admin />}
-          />
+          <Route path='/users/profile' element={<User />} />
+          <Route path='/users/admin' element={<Admin />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/passwordReset' element={<ForgotPassword />} />

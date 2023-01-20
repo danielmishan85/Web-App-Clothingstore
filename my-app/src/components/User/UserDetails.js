@@ -6,25 +6,24 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { onAuthStateChanged } from 'firebase/auth';
 
 import UserOrders from './UserOrders';
+import { auth } from '../../firebase';
 
 export default function UserDetails(props) {
   const [showOrders, setShowOrders] = useState(false);
-  const [user, setUser] = useState([]);
+  const [userAuth, setUserAuth] = useState(null);
 
-  const id = useParams().userId;
-
-  const getUser = () => {
-    fetch(`http://localhost:5000/api/users/${id}`)
-      .then((res) => (res.ok ? res.json() : { user: '' }))
-      .then((data) => {
-        setUser(data.user);
-      });
-  };
   useEffect(() => {
-    getUser();
-  }, []);
+    const listen = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserAuth(user);
+      } else {
+        setUserAuth(null);
+      }
+    });
+  });
 
   const showOrdersHandler = () => {
     setShowOrders(true);
@@ -37,14 +36,13 @@ export default function UserDetails(props) {
         <React.Fragment>
           <CardContent>
             <Typography variant='h5' component='div'>
-              {user.firstName} {user.lastName}
-            </Typography>
-            <Typography sx={{ mb: 1.5 }} color='text.secondary'>
-              {user.email}
+              {userAuth ? <p>{`Hello ${userAuth.email}!`}</p> : <p>null</p>}{' '}
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size='small' onClick={showOrdersHandler}>View My Orders</Button>
+            <Button size='small' onClick={showOrdersHandler}>
+              View My Orders
+            </Button>
           </CardActions>
         </React.Fragment>
       </Card>

@@ -4,23 +4,22 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import { onAuthStateChanged } from 'firebase/auth';
+
+import { auth } from '../../firebase';
 
 export default function UserDetails() {
-  const [admin, setAdmin] = useState([]);
+  const [userAuth, setUserAuth] = useState(null);
 
-  const id = useParams().userId;
-
-  const getUser = () => {
-    fetch(`http://localhost:5000/api/users/${id}`)
-      .then((res) => (res.ok ? res.json() : { user: '' }))
-      .then((data) => {
-        setAdmin(data.user);
-      });
-  };
   useEffect(() => {
-    getUser();
-  }, []);
-  console.log(admin);
+    const listen = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserAuth(user);
+      } else {
+        setUserAuth(null);
+      }
+    });
+  });
 
   return (
     <Box sx={{ minWidth: 275 }}>
@@ -29,10 +28,7 @@ export default function UserDetails() {
         <React.Fragment>
           <CardContent>
             <Typography variant='h5' component='div'>
-              {admin.firstName} {admin.lastName}
-            </Typography>
-            <Typography sx={{ mb: 1.5 }} color='text.secondary'>
-              {admin.email}
+            {userAuth ? <p>{`Hello ${userAuth.email}!`}</p> : <p>null</p>}
             </Typography>
           </CardContent>
         </React.Fragment>

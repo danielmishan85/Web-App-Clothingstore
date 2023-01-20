@@ -6,9 +6,14 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import Modal from '../Admin/Modal'
 
 export default function UserDetails(props) {
-  const users = props.users;
+  const [open, setOpen] = React.useState(false);
+  const editHandler = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  
+const users = props.users;
 
   return (
     <Box sx={{ minWidth: 275 }}>
@@ -57,7 +62,7 @@ export default function UserDetails(props) {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Button size='small'>Edit</Button>
+                      <Button size='small' onClick={editHandler}>Edit</Button>
                       <Button size='small'>Delete</Button>
                     </CardActions>
                   </Card>
@@ -65,6 +70,7 @@ export default function UserDetails(props) {
               ))}
             </Grid>
           </CardContent>
+          <Modal open={open} onClose={handleClose}></Modal>
         </React.Fragment>
       </Card>
     </Box>
