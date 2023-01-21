@@ -32,6 +32,16 @@ const Admin = () => {
     getUsers();
   }, []);
 
+  const deleteHanlder = (id) => {
+    socket.emit("DELETE_USER", id)
+    socket.on("deleteUser_error", (msg) => {
+      alert("Delete Failed. Please try again.")
+    });
+    socket.on("deleteUser_success", (data) => {
+      setUsers([...data]);
+    });
+  }
+
   return (
     <div>
       <br />
@@ -42,7 +52,7 @@ const Admin = () => {
       <br />
       <br />
       <br /> 
-      <UsersList users={users}></UsersList>
+      <UsersList users={users} onDelete={deleteHanlder}></UsersList>
     </div>
   );
 };

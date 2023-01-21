@@ -6,14 +6,14 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import Modal from '../Admin/Modal'
+import Modal from '../Admin/Modal';
 
 export default function UserDetails(props) {
   const [open, setOpen] = React.useState(false);
   const editHandler = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  
-const users = props.users;
+
+  const users = props.users;
 
   return (
     <Box sx={{ minWidth: 275 }}>
@@ -52,7 +52,7 @@ const users = props.users;
                   >
                     <CardContent>
                       <Typography sx={{ fontSize: 18 }}>
-                        Full Name: {item.firstName} {item.lastName}
+                        Name: {item.firstName} {item.lastName}
                       </Typography>
                       <Typography sx={{ fontSize: 18 }}>
                         Email: {item.email}
@@ -60,17 +60,23 @@ const users = props.users;
                       <Typography sx={{ fontSize: 18 }}>
                         Role: {item.role}
                       </Typography>
+                      <Modal
+                        open={open}
+                        onClose={handleClose}
+                        user={item}
+                      ></Modal>
                     </CardContent>
                     <CardActions>
-                      <Button size='small' onClick={editHandler}>Edit</Button>
-                      <Button size='small'>Delete</Button>
+                      <Button size='small' onClick={editHandler}>
+                        Edit
+                      </Button>
+                      <Button size='small' onClick={() => props.onDelete(item._id)}>Delete</Button>
                     </CardActions>
                   </Card>
                 </Grid>
               ))}
             </Grid>
           </CardContent>
-          <Modal open={open} onClose={handleClose}></Modal>
         </React.Fragment>
       </Card>
     </Box>

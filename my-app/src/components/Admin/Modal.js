@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { TextField } from '@mui/material';
 
 const style = {
   position: 'absolute',
@@ -17,6 +18,9 @@ const style = {
 };
 
 export default function BasicModal(props) {
+  const handleSubmit = () => {
+
+  };
 
   return (
     <div>
@@ -28,17 +32,46 @@ export default function BasicModal(props) {
       >
         <Box sx={style}>
           <Typography id='modal-modal-title' variant='h6' component='h2'>
-            User Details
+            Name: {props.user.firstName}  {props.user.lastName} 
           </Typography>
           <Typography id='modal-modal-description' sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            Email:   {props.user.email} 
           </Typography>
-          <br />
-          <br />
-          <br />
-          <br />
-          <Button size='small'>Save</Button>
-          <Button size='small' onClick={props.onClose}>Cancel</Button>
+          <Box
+            component='form'
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
+            <TextField
+              margin='normal'
+              required
+              fullWidth
+              id='role'
+              label='New Role'
+              name='role'
+              autoComplete='role'
+              autoFocus
+            />
+            <Button
+                type='submit'
+                fullWidth
+                variant='contained'
+                sx={{ mt: 3, mb: 2, bgcolor: 'black' }}
+                size='small'
+            >
+              Save
+            </Button>
+          </Box>
+          <Button
+            size='small'
+            onClick={props.onClose}
+            fullWidth
+            variant='contained'
+            sx={{ mt: 3, mb: 2, bgcolor: 'black' }}
+          >
+            Cancel
+          </Button>
         </Box>
       </Modal>
     </div>
