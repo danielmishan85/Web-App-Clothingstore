@@ -39,9 +39,8 @@ const io = require('socket.io')(http, {
 
 io.on('connection',  async (socket) => {
   socket.on('GET_USERS', await socketRoutes.GetUsers(io, socket));
-  
   // socket.on('EDIT_USER', EditUser(io, socket));
-  // socket.on('DELETE_USER', DeleteUser(io, socket));
+  socket.on('DELETE_USER', await socketRoutes.DeleteUser(io, socket));
 });
 
 // io.on('connection', (socket) => {
