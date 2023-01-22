@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -14,7 +14,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
-import { AuthContext } from '../context/auth-context';
 import { auth } from '../firebase';
 
 function Copyright(props) {
@@ -39,7 +38,6 @@ const theme = createTheme();
 
 export default function Login() {
   const history = useNavigate();
-  const authentication = useContext(AuthContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -49,11 +47,10 @@ export default function Login() {
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential);
+        console.log('user logged in: ', userCredential)
       })
       .catch((error) => console.log(error));
 
-    authentication.login();
     history('/');
   };
 

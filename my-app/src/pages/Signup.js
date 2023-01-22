@@ -14,8 +14,9 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { collection, doc } from 'firebase/firestore';
 
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
 
 function Copyright(props) {
   return (
@@ -54,8 +55,17 @@ export default function SignUp() {
 
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential);
+        // return collection(db, 'users', doc(userCredential.user.uid).set({
+        //   firstName: data.get('firstName'),
+        //   lastName: data.get('lastName'),
+        //   role: 'customer',
+        //   ordersList: []
+        // }))
+        console.log(userCredential)
       })
+      // .then(() => {
+      //   console.log('user stored in firebase');
+      // })
       .catch((error) => console.log(error));
 
     fetch('http://localhost:5000/api/users/signup', {
@@ -67,7 +77,7 @@ export default function SignUp() {
       },
     })
       .then(() => {
-        history('/login');
+        history('/');
       })
       .catch((err) => console.error(err));
   };

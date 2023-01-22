@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import Grid from "@mui/material/Grid";
@@ -10,9 +10,10 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Divider } from "@mui/material";
 import { useParams } from "react-router-dom";
+
 import ProductPageIcons from "../components/Product/ProductIcons";
-import { useStateValue } from "../context/StateProvider";
-import { useContext } from "react";
+import { useStateValue } from "../context/stateProvider";
+
 
 const theme = createTheme();
 
@@ -20,7 +21,7 @@ function Product(props) {
   const [state, dispatch] = useStateValue();
   const id = useParams().productId;
   const product = props.products.find((p) => p.id === id);
-  console.log(product);
+ 
   const addToBasket = () => {
     // code to add a product to the basket
     dispatch({

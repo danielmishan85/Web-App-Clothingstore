@@ -5,8 +5,8 @@ import CategoryCard from "../components/Category/CategoryCard";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
-import FilterSection from "../components/Category/FilterSection";
-import "../components/Category/Filter.css";
+import FilterSection from "../components/UI/FilterSection";
+import '../components/UI/Filter.css';
 
 import { Box, Container } from "@mui/system";
 
