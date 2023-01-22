@@ -13,6 +13,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { collection, doc } from 'firebase/firestore';
+
+import { auth, db } from '../firebase';
 
 function Copyright(props) {
   return (
@@ -40,27 +44,30 @@ export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const email = data.get('email');
+    const password = data.get('password');
     const userData = {
       firstName: data.get('firstName'),
       lastName: data.get('lastName'),
-      email: data.get('email'),
-      password: data.get('password'),
+      email: email,
+      password: password,
     };
-    const userAuth = {
-      email: data.get('email'),
-      password: data.get('password'),
-    }
-    fetch(
-      'https://online-store-37733-default-rtdb.firebaseio.com/users.json',
-      {
-        method: 'POST',
-        body: JSON.stringify(userAuth),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    ).catch((err) => console.error(err));
-    console.log(userData)
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // return collection(db, 'users', doc(userCredential.user.uid).set({
+        //   firstName: data.get('firstName'),
+        //   lastName: data.get('lastName'),
+        //   role: 'customer',
+        //   ordersList: []
+        // }))
+        console.log(userCredential)
+      })
+      // .then(() => {
+      //   console.log('user stored in firebase');
+      // })
+      .catch((error) => console.log(error));
+
     fetch('http://localhost:5000/api/users/signup', {
       method: 'POST',
       mode: 'cors',
@@ -70,7 +77,7 @@ export default function SignUp() {
       },
     })
       .then(() => {
-        history('/login');
+        history('/');
       })
       .catch((err) => console.error(err));
   };

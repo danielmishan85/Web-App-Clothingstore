@@ -8,7 +8,7 @@ const getAllUsers = async (req, res, next) => {
   try {
     users = await User.find(
       {},
-      'firstName lastName email password getSpam type logedIn ordersList'
+      'firstName lastName email password role ordersList'
     );
   } catch (err) {
     return next(
@@ -22,6 +22,7 @@ const getAllUsers = async (req, res, next) => {
 
 const getUserById = async (req, res, next) => {
   const userId = req.params.uid;
+
   let user;
   try {
     user = await User.findById(userId);
@@ -30,7 +31,6 @@ const getUserById = async (req, res, next) => {
       new HttpError('Something went wrong, could not find a user.', 500)
     );
   }
-
   if (!user) {
     return next(
       new HttpError('Could not find a user for the provided id.', 404)
@@ -41,16 +41,7 @@ const getUserById = async (req, res, next) => {
 };
 
 const updateUser = async (req, res, next) => {
-  const {
-    firstName,
-    lastName,
-    email,
-    password,
-    getSpam,
-    type,
-    logedIn,
-    ordersList,
-  } = req.body;
+  const { firstName, lastName, email, password, role, ordersList } = req.body;
   const userId = req.params.uid;
 
   let user;
@@ -66,9 +57,7 @@ const updateUser = async (req, res, next) => {
   user.lastName = lastName;
   user.email = email;
   user.password = password;
-  user.getSpam = getSpam;
-  user.type = type;
-  user.logedIn = logedIn;
+  user.role = role;
   user.ordersList = ordersList;
 
   try {
@@ -157,9 +146,7 @@ const signup = async (req, res, next) => {
     lastName,
     email,
     password,
-    getSpam: false,
-    type: 'customer',
-    logedIn: false,
+    role: 'customer',
     ordersList: [],
   });
 
@@ -190,7 +177,28 @@ const login = async (req, res, next) => {
     );
   }
 
-  res.json({ message: 'Logged in!' });
+  //res.json({ message: 'Logged in!' });
+  res.status(200).json({ user: existingUser.toObject({ getters: true }) });
+};
+
+const getUserByEmail = async (req, res, next) => {
+  const userEmail = req.params.uemail;
+
+  let user;
+  try {
+    user = await User.findOne({ email: userEmail });
+  } catch (err) {
+    return next(
+      new HttpError('Something went wrong, could not find a user.', 500)
+    );
+  }
+  if (!user) {
+    return next(
+      new HttpError('Could not find a user for the provided id.', 404)
+    );
+  }
+
+  res.json({ user: user.toObject({ getters: true }) });
 };
 
 exports.getAllUsers = getAllUsers;
@@ -200,3 +208,4 @@ exports.login = login;
 exports.updateUser = updateUser;
 exports.resetPassword = resetPassword;
 exports.deleteUser = deleteUser;
+exports.getUserByEmail = getUserByEmail;

@@ -1,6 +1,6 @@
 import React from "react";
 
-import Headerphoto from "../../photos/headerphoto.png";
+import Headerphoto from "../photos/headerphoto.png";
 import { Container, Heading } from "./HeaderStyles";
 
 function Header() {

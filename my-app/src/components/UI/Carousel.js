@@ -2,8 +2,8 @@ import React from "react";
 
 import Carousel from "react-material-ui-carousel";
 import CarouselImage from "./CarouselImage";
-import Banner1 from "../../photos/banner1.png";
-import Banner2 from "../../photos/banner2.png";
+import Banner1 from "../photos/banner1.png";
+import Banner2 from "../photos/banner2.png";
 import { Box } from "@mui/system";
 
 function MyCarousel() {

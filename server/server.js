@@ -6,9 +6,11 @@ const cors = require('cors');
 const productsRoutes = require('./routes/products');
 const userRoutes = require('./routes/users');
 const orderRoutes = require('./routes/orders');
+const socketRoutes = require('./routes/socketUser')
 const HttpError = require('./models/http-error');
 
 const server = express();
+const http = require('http').Server(server);
 mongoose.set('strictQuery', true);
 
 server.use(bodyParser.json());
@@ -28,6 +30,27 @@ server.use('/api/products', productsRoutes);
 server.use('/api/users', userRoutes);
 server.use('/api/orders', orderRoutes);
 
+const io = require('socket.io')(http, {
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST'],
+  },
+});
+
+io.on('connection',  async (socket) => {
+  socket.on('GET_USERS', await socketRoutes.GetUsers(io, socket));
+  // socket.on('EDIT_USER', EditUser(io, socket));
+  socket.on('DELETE_USER', await socketRoutes.DeleteUser(io, socket));
+});
+
+// io.on('connection', (socket) => {
+//   activeUserCount++;
+//   socket.on('disconnect', () => {
+//     activeUserCount--;
+//   });
+// });
+
+
 server.use((req, res, next) => {
   return next(new HttpError('Could not find this route.', 404));
 });
@@ -45,6 +68,6 @@ mongoose
     'mongodb+srv://Danielmishan:Danielush7598@cluster0.cwwwndg.mongodb.net/clothingStore?retryWrites=true&w=majority'
   )
   .then(() => {
-    server.listen(5000, () => console.log('connected to db'));
+    http.listen(5000, () => console.log('connected to db'));
   })
   .catch((err) => console.log(err));

@@ -61,9 +61,8 @@
     color: black;
     background: transparent;
   }
-  
-  .nav-links button:hover,
-  .nav-links button:active {
 
+  span{
+    font-size: x-large;
   }
 }
