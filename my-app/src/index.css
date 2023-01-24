@@ -40,3 +40,94 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.Button_inner {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  padding: 10px;
+  background-color: #333;
+  border: 1px solid #222;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+.Button_inner:disabled {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  padding: 10px;
+  background-color: rgb(104, 104, 104);
+  border: 1px solid #222;
+  border-radius: 5px;
+  color: white;
+  cursor: not-allowed;
+}
+
+.table {
+  margin: auto;
+  width: 100%;
+  padding: 5vw;
+}
+
+.table thead {
+  font-size: 1.3em;
+}
+
+.table thead tr th {
+  padding-left: 15px;
+}
+
+.table tbody {
+  text-align: center;
+}
+
+.table tbody + thead {
+  display: none;
+}
+
+.addUser {
+  width: 50vw;
+  margin: auto;
+  margin-top: 20vh;
+  margin-bottom: 15vh;
+  background-color: #555;
+  border: 1px solid #ced4da;
+  border-radius: 10px;
+  position: relative;
+  text-align: center;
+}
+.addUser h2 {
+  padding: 0.5rem;
+}
+.addUser span {
+  position: absolute;
+  background-color: red;
+  color: white;
+  padding: 10px;
+  right: 5px;
+  top: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.addUser .input-group {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+}
+.addUser .input-group,
+.addUser label,
+.addUser input,
+.addUser select {
+  width: 45vw;
+  font-size: 1.3rem;
+}
+.addUser .submit {
+  background-color: #333;
+  padding: 10px;
+  color: white;
+  width: 30vw;
+  border: 1px solid grey;
+  border-radius: 10px;
+}
+.addUser .editView {
+  margin-bottom: 3rem;
+}

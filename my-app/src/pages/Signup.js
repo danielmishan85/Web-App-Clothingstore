@@ -14,7 +14,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { collection, doc } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
 
 import { auth, db } from '../firebase';
 
@@ -46,40 +46,55 @@ export default function SignUp() {
     const data = new FormData(event.currentTarget);
     const email = data.get('email');
     const password = data.get('password');
-    const userData = {
-      firstName: data.get('firstName'),
-      lastName: data.get('lastName'),
-      email: email,
-      password: password,
-    };
+    // const userData = {
+    //   firstName: firstName,
+    //   lastName: lastName,
+    //   email: email,
+    //   password: password,
+    // };
 
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // return collection(db, 'users', doc(userCredential.user.uid).set({
-        //   firstName: data.get('firstName'),
-        //   lastName: data.get('lastName'),
-        //   role: 'customer',
-        //   ordersList: []
-        // }))
-        console.log(userCredential)
-      })
-      // .then(() => {
-      //   console.log('user stored in firebase');
-      // })
-      .catch((error) => console.log(error));
+      .then(async (res) => {
+        console.log(res);
+        try {
+          const docRef = await addDoc(collection(db, 'users'), {
+            firstName: data.get('firstName'),
+            lastName: data.get('lastName'),
+            role: 'customer',
+            userId: `${res.user.uid}`,
+          });
+          // const ref = doc(db, 'userInfo', res.user.uid);
+          // const docRef = await setDoc(ref, {
+          //   firstName,
+          //   lastName,
+          //   role: 'customer',
+          // });
 
-    fetch('http://localhost:5000/api/users/signup', {
-      method: 'POST',
-      mode: 'cors',
-      body: JSON.stringify(userData),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
+          console.log('Document written with ID: ', docRef.id);
+        } catch (err) {
+          console.log(err);
+        }
+      })
+      .then(() => {
+        console.log('user stored in firebase');
+      })
       .then(() => {
         history('/');
       })
-      .catch((err) => console.error(err));
+      .catch((error) => console.log(error));
+
+    // fetch('http://localhost:5000/api/users/signup', {
+    //   method: 'POST',
+    //   mode: 'cors',
+    //   body: JSON.stringify(userData),
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    // })
+    //   .then(() => {
+    //     history('/');
+    //   })
+    //   .catch((err) => console.error(err));
   };
 
   return (

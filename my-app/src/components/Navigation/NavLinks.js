@@ -9,27 +9,42 @@ import { Link } from 'react-router-dom';
 
 import { auth } from '../../firebase';
 import './NavLinks.css';
-import { getBasketItemAmount } from "../../context/reducer";
-import { useStateValue } from "../../context/stateProvider";
+import { getBasketItemAmount } from '../../context/reducer';
+import { useStateValue } from '../../context/stateProvider';
 
 const NavLinks = () => {
   const [{ basket }, dispatch] = useStateValue();
   const [userAuth, setUsetAuth] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const history = useNavigate();
 
   useEffect(() => {
+    // const getUsers = onSnapshot(collection(db, 'users'), (querySnapshot) => {
+    //   const items = [];
+    //   querySnapshot.forEach((doc) => items.push(doc.data()));
+    //   setUsers(items);
+    // });
+
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUsetAuth(user);
+        if(user.email === 'danielmishan85@gmail.com') {
+          setIsAdmin(true)
+          console.log(isAdmin)
+        }
       } else {
         setUsetAuth(null);
+        setIsAdmin(false)
       }
     });
 
     return () => {
+      //getUsers();
       listen();
     };
-  });
+  }, []);
+
+  
 
   const signoutHandler = () => {
     signOut(auth)
@@ -47,9 +62,16 @@ const NavLinks = () => {
           <HomeIcon sx={{ fontSize: '50px' }} />
         </NavLink>
       </li>
-      {userAuth && (
+      {userAuth && isAdmin && (
         <li>
           <NavLink to={`/users/Admin`}>
+            <AccountCircleIcon sx={{ fontSize: '50px' }} />
+          </NavLink>
+        </li>
+      )}
+      {userAuth && !isAdmin && (
+        <li>
+          <NavLink to={`/users/profile`}>
             <AccountCircleIcon sx={{ fontSize: '50px' }} />
           </NavLink>
         </li>
@@ -61,15 +83,15 @@ const NavLinks = () => {
           </NavLink>
         </li>
       )}
-       <li>
-        <Link to="/checkout">
-            <span className="shoppingcarticon__icon">
-              <ShoppingCartIcon sx={{ fontSize: "50px" }} />
-            </span>
-            <span> Your Cart </span>
-            <span className="shopping__amount">
-              {getBasketItemAmount(basket)}
-            </span>
+      <li>
+        <Link to='/checkout'>
+          <span className='shoppingcarticon__icon'>
+            <ShoppingCartIcon sx={{ fontSize: '50px' }} />
+          </span>
+          <span> Your Cart </span>
+          <span className='shopping__amount'>
+            {getBasketItemAmount(basket)}
+          </span>
         </Link>
       </li>
       {userAuth && (
