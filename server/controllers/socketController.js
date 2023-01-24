@@ -13,12 +13,12 @@ const getUsers = async () => {
   }
 };
 
-const editUser = async (email, name, password, userType, _id, isEdit) => {
+const editUser = async (email, firstName, lastName, password, role, _id, isEdit) => {
   try {
       if (isEdit) {
           await User.findOneAndUpdate(
               { _id: _id },
-              [{ $set: { email: email, name: name, userType: userType } }]
+              [{ $set: { email: email, firstName: firstName, lastName: lastName, role: role } }]
           );
       } else {
           const userExist = await User.findOne({ email });

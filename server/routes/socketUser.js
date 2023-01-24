@@ -9,9 +9,9 @@ const GetUsers = (io, socket) => async () => {
 };
 
 const EditUser = (io, socket) => async ( {chosenUser, isEdit} ) => {
-  const {email, name, password, userType, _id} = chosenUser
+  const {email, firstName, lastName, password, role, _id} = chosenUser
   console.log(chosenUser)
-  const res = await userController.editUser(email, name, password, userType, _id, isEdit);
+  const res = await userController.editUser(email, firstName, lastName, password, role, _id, isEdit);
   res.error ?
       socket.emit("editUser_error", res.error)
       : socket.emit("editUser_success", res.success)
