@@ -3,18 +3,32 @@ import React from 'react';
 import UserDetails from '../components/User/UserDetails';
 
 const User = () => {
-  // fetch('https://dummyjson.com/users')
+  // API of 100 fake users into mongoDb
+
+  // fetch('https://dummyjson.com/users?limit=100&skip=0')
   //   .then((res) => res.json())
   //   .then((json) =>
-  //   json.users.forEach(element => {
-  //     const userData = {
-  //       firstName: element.firstName,
-  //       lastName: element.lastName,
-  //       email: element.email,
-  //       password: element.password,
-  //     }
-  //     console.log(userData)
-  //   }));
+  //     json.users.forEach((element) => {
+  //       const userData = {
+  //         firstName: element.firstName,
+  //         lastName: element.lastName,
+  //         email: element.email,
+  //         password: element.password,
+  //       };
+  //       fetch('http://localhost:5000/api/users/signup', {
+  //         method: 'POST',
+  //         mode: 'cors',
+  //         body: JSON.stringify(userData),
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //       })
+  //         .then(() => {
+  //           console.log(userData);
+  //         })
+  //         .catch((err) => console.error(err));
+  //     })
+  //   );
 
   return (
     <div>
