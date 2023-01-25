@@ -46,12 +46,12 @@ export default function SignUp() {
     const data = new FormData(event.currentTarget);
     const email = data.get('email');
     const password = data.get('password');
-    // const userData = {
-    //   firstName: data.get('firstName'),
-    //   lastName: data.get('lastName'),
-    //   email: email,
-    //   password: password,
-    // };
+    const userData = {
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName'),
+      email: email,
+      password: password,
+    };
 
     createUserWithEmailAndPassword(auth, email, password)
       .then(async (res) => {
@@ -83,18 +83,18 @@ export default function SignUp() {
       })
       .catch((error) => console.log(error));
 
-    // fetch('http://localhost:5000/api/users/signup', {
-    //   method: 'POST',
-    //   mode: 'cors',
-    //   body: JSON.stringify(userData),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    // })
-    //   .then(() => {
-    //     history('/');
-    //   })
-    //   .catch((err) => console.error(err));
+    fetch('http://localhost:5000/api/users/signup', {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify(userData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(() => {
+        history('/');
+      })
+      .catch((err) => console.error(err));
   };
 
   return (

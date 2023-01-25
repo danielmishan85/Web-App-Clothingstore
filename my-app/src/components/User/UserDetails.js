@@ -10,19 +10,29 @@ import { onAuthStateChanged } from 'firebase/auth';
 import UserOrders from './UserOrders';
 import { auth } from '../../firebase';
 
-export default function UserDetails(props) {
+export default function UserDetails() {
   const [showOrders, setShowOrders] = useState(false);
   const [userAuth, setUserAuth] = useState(null);
+  const [orders, setOrders] = useState([]);
+
+  const getOrdersByEmail = (email) => {
+    fetch(`http://localhost:5000/api/orders/user/${email}`)
+      .then((res) => (res.ok ? res.json() : { orders: '' }))
+      .then((data) => {
+        setOrders(data.orders);
+      });
+  };
 
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUserAuth(user);
+        getOrdersByEmail(user.email);
       } else {
         setUserAuth(null);
       }
     });
-  });
+  }, []);
 
   const showOrdersHandler = () => {
     setShowOrders(true);
@@ -48,7 +58,7 @@ export default function UserDetails(props) {
       <br />
       <br />
       <br />
-      {showOrders && <UserOrders users={props.users}></UserOrders>}
+      {showOrders && <UserOrders orders={orders}></UserOrders>}
     </Box>
   );
 }

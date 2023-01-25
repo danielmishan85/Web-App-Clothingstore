@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -7,10 +7,6 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 
 export default function UserDetails(props) {
-  const id = useParams().userId;
-
-  const user = props.users.find((u) => u.id === id);
-  const userOrders = user.ordersList;
 
   return (
     <Box sx={{ minWidth: 275 }}>
@@ -21,7 +17,7 @@ export default function UserDetails(props) {
             <Typography variant='h5' component='div'>
               My Orders
             </Typography>
-            {userOrders.map((item, i) => (
+            {props.orders.map((item, i) => (
               <Grid
                 key={i}
                 item
@@ -33,7 +29,7 @@ export default function UserDetails(props) {
                 {' '}
                 <Card
                   sx={{
-                    bgcolor: '#eaece5',
+                    bgcolor: 'white',
                     maxWidth: 300,
                   }}
                 >
