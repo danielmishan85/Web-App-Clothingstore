@@ -9,7 +9,7 @@ router.get('/', controller.getAllOrders);
 
 router.get('/:oid', controller.getOrderById);
 
-router.get('/user/:uid', controller.getOrdersByUserId);
+router.get('/user/:uemail', controller.getOrdersByUserEmail);
 
 router.post('/', [
     check('totalPrice').not().isEmpty(),

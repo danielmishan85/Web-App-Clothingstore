@@ -40,12 +40,12 @@ const getOrderById = async (req, res, next) => {
   res.json({ order: order.toObject({ getters: true }) });
 };
 
-const getOrdersByUserId = async (req, res, next) => {
-  const userId = req.params.uid;
+const getOrdersByUserEmail = async (req, res, next) => {
+  const userEmail = req.params.uemail;
 
   let orders;
   try {
-    orders = await Order.find({ creator: userId });
+    orders = await Order.find({ creator: userEmail });
   } catch (err) {
     return next(
       new HttpError('Fatching orders failed, please try again later', 500)
@@ -82,7 +82,7 @@ const createOrder = async (req, res, next) => {
 
   let user;
   try {
-    user = await User.findById(creator);
+    user = await User.findOne({ email: creator });
   } catch (err) {
     return next(new HttpError('Creating order faild, please try again.', 500));
   }
@@ -169,7 +169,7 @@ const deleteOrder = async (req, res, next) => {
 
 exports.getAllOrders = getAllOrders;
 exports.getOrderById = getOrderById;
-exports.getOrdersByUserId = getOrdersByUserId;
+exports.getOrdersByUserEmail = getOrdersByUserEmail;
 exports.createOrder = createOrder;
 exports.updateOrder = updateOrder;
 exports.deleteOrder = deleteOrder;
