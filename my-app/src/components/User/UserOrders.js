@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -37,7 +36,7 @@ export default function UserDetails(props) {
                     Date of purchase: {item.date}
                   </Typography>
                   <Typography sx={{ fontSize: 18 }}>
-                    Total Price: ${item.totalPrice}
+                    Total Price: {item.totalPrice}
                   </Typography>
                 </Card>
               </Grid>
