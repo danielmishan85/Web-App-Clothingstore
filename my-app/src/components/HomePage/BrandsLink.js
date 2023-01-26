@@ -12,7 +12,7 @@ function BrandsLink(props) {
         }}
         to="/brands"
       >
-        <h1 style={{ color: "black" }}>Brands</h1>
+        <h1 style={{ color: "black" }}>All Brands</h1>
       </Link>
     </Container>
   );
