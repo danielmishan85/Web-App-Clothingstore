@@ -127,8 +127,30 @@ const deleteProduct = async (req, res, next) => {
   res.status(200).json({ message: 'Deleted product.' });
 };
 
+const getProductsGroupByTitle = async (req, res, next) => {
+  const { title } = req.body;
+  let products;
+  try {
+    products = await Product.find({
+      title: { $regex: `${title}`, $options: 'i' },
+    });
+  } catch (err) {
+    const error = new HttpError(
+      'Something went wrong, could not find any products.',
+      500
+    );
+    return next(error);
+  }
+  if (!products) {
+    const error = new HttpError('could not find Products', 500);
+    return next(error);
+  }
+  res.json(products);
+};
+
 exports.getAllProducts = getAllProducts;
 exports.getProductById = getProductById;
 exports.createProduct = createProduct;
 exports.updateProduct = updateProduct;
 exports.deleteProduct = deleteProduct;
+exports.getProductsGroupByTitle = getProductsGroupByTitle;

@@ -9,6 +9,8 @@ router.get('/', controller.getAllProducts);
 
 router.get('/:pid', controller.getProductById);
 
+router.post('/filter', controller.getProductsGroupByTitle);
+
 router.post(
   '/',
   [
