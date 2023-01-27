@@ -34,7 +34,7 @@ function App() {
         <Routes>
           <Route path='/' exact element={<Home />} />
           <Route path='/users/profile' element={<User />} />
-          <Route path='/users/admin' element={<Admin />} />
+          <Route path='/users/admin' element={<Admin  products={products}/>} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/passwordReset' element={<ForgotPassword />} />

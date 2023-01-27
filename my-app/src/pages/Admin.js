@@ -3,8 +3,9 @@ import io from 'socket.io-client';
 import { MDBDataTable } from 'mdbreact';
 
 import AdminDetails from '../components/Admin/AdminDetails';
+import Graph from '../components/UI/Graph';
 
-const Admin = () => {
+const Admin = (props) => {
   const [users, setUsers] = useState([]);
   const [editView, setEditView] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -153,6 +154,7 @@ const Admin = () => {
       <br />
       <h1>Admin Tutorial</h1>
       <AdminDetails></AdminDetails>
+      <Graph products={props.products} />
       <div className='table'>
         {!editView && (
           <div>
