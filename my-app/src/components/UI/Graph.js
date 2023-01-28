@@ -1,15 +1,27 @@
-import React, { useEffect, useState, useRef } from "react";
-import Chart from "chart.js";
-import { Box } from "@mui/system";
-import { Card } from "@mui/material";
+import React, { useEffect, useState, useRef } from 'react';
+import Chart from 'chart.js';
+import { Card } from '@mui/material';
 
-function Graph({ products }) {
+function Graph() {
+  const [productsId, setProductsId] = useState([]);
   const chartRef = useRef(null);
 
+  const getData = () => {
+    fetch('http://localhost:5000/api/orders/graph')
+      .then((res) => (res.ok ? res.json() : { products: '' }))
+      .then((data) => {
+        setProductsId(data.products);
+      });
+  };
   useEffect(() => {
-    if (!products || !products.length) return;
+    getData();
+  }, []);
+  console.log(productsId)
+
+  useEffect(() => {
+    if (!productsId || !productsId.length) return;
     // group products by type and count the number of each type
-    const grouped = products.reduce((acc, curr) => {
+    const grouped = productsId.reduce((acc, curr) => {
       if (!acc[curr.type]) {
         acc[curr.type] = { type: curr.type, count: 0 };
       }
@@ -18,23 +30,23 @@ function Graph({ products }) {
     }, {});
 
     const data = Object.values(grouped);
-    const ctx = document.getElementById("myChart");
+    const ctx = document.getElementById('myChart');
     if (!ctx) return;
     if (chartRef.current) chartRef.current.destroy();
     const myChart = new Chart(ctx, {
-      type: "bar",
+      type: 'bar',
       data: {
         labels: data.map((e) => e.type),
         datasets: [
           {
-            label: "product",
+            label: 'product',
             data: data.map((row) => row.count),
             backgroundColor: [
-              "rgba(254, 229 ,229 ,0.8)",
-              "rgba(241,236 ,215 ,0.8)",
-              "rgba(216,225 ,239 ,0.8)",
+              'rgba(254, 229 ,229 ,0.8)',
+              'rgba(241,236 ,215 ,0.8)',
+              'rgba(216,225 ,239 ,0.8)',
             ],
-            borderColor: "black",
+            borderColor: 'black',
             borderWidth: 3,
           },
         ],
@@ -42,11 +54,11 @@ function Graph({ products }) {
       options: {
         responsive: true,
         legend: {
-          position: "top",
+          position: 'top',
         },
         title: {
           display: true,
-          text: "Product Type By Quantity",
+          text: 'Product Type By Purchase Quantity',
         },
         scales: {
           yAxes: [
@@ -61,28 +73,28 @@ function Graph({ products }) {
     });
 
     chartRef.current = myChart;
-  }, [products]);
+  }, [productsId]);
 
   return (
     <Card
       sx={{
-        marginTop: "10%",
+        marginTop: '1%',
         width: 750,
         height: 380,
-        marginLeft: "20rem",
-        border: "3px solid black",
+        marginLeft: '32rem',
+        border: '3px solid black',
       }}
     >
       <div
         style={{
           width: 700,
-          display: "flex",
-          alignItems: "center",
+          display: 'flex',
+          alignItems: 'center',
           marginLeft: 20,
-          justifyContent: "center",
+          justifyContent: 'center',
         }}
       >
-        <canvas id="myChart"></canvas>
+        <canvas id='myChart'></canvas>
       </div>
     </Card>
   );

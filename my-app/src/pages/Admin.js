@@ -5,7 +5,7 @@ import { MDBDataTable } from "mdbreact";
 import AdminDetails from "../components/Admin/AdminDetails";
 import Graph from "../components/UI/Graph";
 
-const Admin = (props) => {
+const Admin = () => {
   const [users, setUsers] = useState([]);
   const [editView, setEditView] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -154,7 +154,7 @@ const Admin = (props) => {
       <br />
       <h1>Admin Tutorial</h1>
       <AdminDetails></AdminDetails>
-      <Graph products={props.products} />
+      <Graph />
       <div className="table">
         {!editView && (
           <div>
@@ -219,6 +219,7 @@ const Admin = (props) => {
         )}
       </div>
     </div>
+     
   );
 };
 

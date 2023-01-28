@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 
 const Order = require('../models/order');
 const User = require('../models/user');
-
+const Product = require('../models/product');
+const product = require('../models/product');
 
 const getAllOrders = async (req, res, next) => {
   let orders;
@@ -147,9 +148,7 @@ const deleteOrder = async (req, res, next) => {
   }
 
   if (!order) {
-    return next(
-      new HttpError('Could not find order for provided id', 404)
-    );
+    return next(new HttpError('Could not find order for provided id', 404));
   }
 
   try {
@@ -167,9 +166,33 @@ const deleteOrder = async (req, res, next) => {
   res.status(200).json({ message: 'Deleted order.' });
 };
 
+const getGraphData = async (req, res, next) => {
+  let products = [];
+  let productsObj = [];
+  let orders;
+  try {
+    orders = await Order.find({}, 'products');
+    products = await Product.find();
+  } catch (err) {
+    return next(
+      new HttpError('Fatching orders failed, please try again later.', 500)
+    );
+  }
+
+  orders.forEach((order) => {
+    order.products.map((product) => { 
+      productsObj.push(products.find(p => p.id === product._id.toString()))
+    });
+  });
+console.log(productsObj)
+
+  res.json({ products:  productsObj.map((order) => order.toObject({ getters: true }))});
+};
+
 exports.getAllOrders = getAllOrders;
 exports.getOrderById = getOrderById;
 exports.getOrdersByUserEmail = getOrdersByUserEmail;
 exports.createOrder = createOrder;
 exports.updateOrder = updateOrder;
 exports.deleteOrder = deleteOrder;
+exports.getGraphData = getGraphData;

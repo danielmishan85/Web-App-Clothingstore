@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useStateValue } from "../../context/stateProvider";
 import "./CheckoutProduct.css";
@@ -9,6 +9,7 @@ import Button from "../UI/Button";
 
 function CheckoutProduct({ title, img, price, amount, id, desc, productName }) {
   const [{ basket }, dispatch] = useStateValue();
+  const [test, setTest] = useState(amount)
   const removeFromBasket = () => {
     dispatch({
       type: "REMOVE_FROM_BASKET",
@@ -17,6 +18,7 @@ function CheckoutProduct({ title, img, price, amount, id, desc, productName }) {
   };
 
   const plusOne = () => {
+    setTest(test+1)
     dispatch({
       type: "ADD_TO_BASKET",
       item: {
@@ -33,6 +35,7 @@ function CheckoutProduct({ title, img, price, amount, id, desc, productName }) {
   };
 
   const minusOne = () => {
+    setTest(test-1)
     dispatch({
       type: "MINUS_ONE_FROM_BASKET",
       item: {
@@ -60,7 +63,7 @@ function CheckoutProduct({ title, img, price, amount, id, desc, productName }) {
             title="-"
             className="checkoutProduct__btn checkoutProduct__btn-plus"
           />
-          <p className="checkoutProduct__amount">{amount} </p>
+          <p className="checkoutProduct__amount">{test} </p>
           <Button
             onClick={plusOne}
             title="+"
@@ -69,7 +72,7 @@ function CheckoutProduct({ title, img, price, amount, id, desc, productName }) {
         </div>
         <p className="checkoutProduct__price">
           <small>$</small>
-          <strong>{(price * amount).toFixed(2)}</strong>
+          <strong>{(price * test).toFixed(2)}</strong>
         </p>
         <Button
           className="checkoutProduct__remove"

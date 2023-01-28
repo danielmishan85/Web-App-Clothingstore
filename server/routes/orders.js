@@ -7,6 +7,8 @@ const router = express.Router();
 
 router.get('/', controller.getAllOrders);
 
+router.get('/graph', controller.getGraphData);
+
 router.get('/:oid', controller.getOrderById);
 
 router.get('/user/:uemail', controller.getOrdersByUserEmail);
