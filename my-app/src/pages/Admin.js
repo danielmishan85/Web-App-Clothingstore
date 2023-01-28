@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
-import { MDBDataTable } from 'mdbreact';
+import React, { useState, useEffect } from "react";
+import io from "socket.io-client";
+import { MDBDataTable } from "mdbreact";
 
-import AdminDetails from '../components/Admin/AdminDetails';
-import Graph from '../components/UI/Graph';
+import AdminDetails from "../components/Admin/AdminDetails";
+import Graph from "../components/UI/Graph";
 
 const Admin = (props) => {
   const [users, setUsers] = useState([]);
   const [editView, setEditView] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [chosenUser, setChosenUser] = useState({
-    email: '',
-    firstName: '',
-    lastName: '',
-    role: '',
-    _id: '',
+    email: "",
+    firstName: "",
+    lastName: "",
+    role: "",
+    _id: "",
   });
-  const socket = io('http://localhost:5000');
+  const socket = io("http://localhost:5000");
   const { email, firstName, lastName, role } = chosenUser;
 
   if (users === undefined) setUsers([]);
@@ -25,13 +25,13 @@ const Admin = (props) => {
       if (!users[0]) {
         try {
           // eslint-disable-next-line
-          socket.emit('GET_USERS');
+          socket.emit("GET_USERS");
           // eslint-disable-next-line
-          socket.on('getUsers_error', (msg) => {
-            alert('Getting User Failed on server.');
+          socket.on("getUsers_error", (msg) => {
+            alert("Getting User Failed on server.");
           });
           // eslint-disable-next-line
-          socket.on('getUsers_success', (data) => {
+          socket.on("getUsers_success", (data) => {
             setUsers([...data]);
           });
         } catch (e) {
@@ -54,21 +54,21 @@ const Admin = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     setEditView(false);
-    socket.emit('EDIT_USER', { chosenUser, isEdit });
-    socket.on('editUser_error', (msg) => {
-      alert('Please try again.');
+    socket.emit("EDIT_USER", { chosenUser, isEdit });
+    socket.on("editUser_error", (msg) => {
+      alert("Please try again.");
     });
-    socket.on('editUser_success', (data) => {
+    socket.on("editUser_success", (data) => {
       setUsers([...data]);
     });
   };
 
   const deleteHanlder = (id) => {
-    socket.emit('DELETE_USER', id);
-    socket.on('deleteUser_error', (msg) => {
-      alert('Delete Failed. Please try again.');
+    socket.emit("DELETE_USER", id);
+    socket.on("deleteUser_error", (msg) => {
+      alert("Delete Failed. Please try again.");
     });
-    socket.on('deleteUser_success', (data) => {
+    socket.on("deleteUser_success", (data) => {
       setUsers([...data]);
     });
   };
@@ -76,39 +76,39 @@ const Admin = (props) => {
   const userData = {
     columns: [
       {
-        label: 'First Name',
-        field: 'firstName',
-        sort: 'asc',
+        label: "First Name",
+        field: "firstName",
+        sort: "asc",
         width: 100,
       },
       {
-        label: 'Last Name',
-        field: 'lastName',
-        sort: 'asc',
+        label: "Last Name",
+        field: "lastName",
+        sort: "asc",
         width: 100,
       },
       {
-        label: 'Role',
-        field: 'role',
-        sort: 'asc',
+        label: "Role",
+        field: "role",
+        sort: "asc",
         width: 100,
       },
       {
-        label: 'Email',
-        field: 'email',
-        sort: 'asc',
+        label: "Email",
+        field: "email",
+        sort: "asc",
         width: 150,
       },
       {
-        label: 'Edit',
-        field: 'edit',
-        sort: 'asc',
+        label: "Edit",
+        field: "edit",
+        sort: "asc",
         width: 100,
       },
       {
-        label: 'Delete',
-        field: 'delete',
-        sort: 'asc',
+        label: "Delete",
+        field: "delete",
+        sort: "asc",
         width: 100,
       },
     ],
@@ -130,7 +130,7 @@ const Admin = (props) => {
               });
               editHandler();
             }}
-            className='Button_inner'
+            className="Button_inner"
           >
             Edit
           </button>
@@ -138,7 +138,7 @@ const Admin = (props) => {
         delete: (
           <button
             onClick={() => deleteHanlder(user._id)}
-            className='Button_inner'
+            className="Button_inner"
           >
             Delete
           </button>
@@ -155,60 +155,65 @@ const Admin = (props) => {
       <h1>Admin Tutorial</h1>
       <AdminDetails></AdminDetails>
       <Graph products={props.products} />
-      <div className='table'>
+      <div className="table">
         {!editView && (
           <div>
             <MDBDataTable hover striped bordered small data={userData} />
           </div>
         )}
         {editView && (
-          <div className='addUser'>
-            <h2>{isEdit ? 'Edit User' : 'Add User'}</h2>
-            <form className='editView' onSubmit={onSubmit}>
-              <span onClick={() => setEditView(false)}>X</span>
-              <div className='input-group'>
-                <label htmlFor='firstName'>First Name</label>
+          <div className="addUser">
+            <h2>{isEdit ? "Edit User" : "Add User"}</h2>
+            <form className="editView" onSubmit={onSubmit}>
+              <span
+                style={{ backgroundColor: "black" }}
+                onClick={() => setEditView(false)}
+              >
+                X
+              </span>
+              <div className="input-group">
+                <label htmlFor="firstName">First Name :</label>
                 <input
-                  type='text'
-                  style={{ color: 'black' }}
-                  name='firstName'
-                  id='firstName'
+                  type="text"
+                  style={{ color: "black" }}
+                  name="firstName"
+                  id="firstName"
                   value={firstName}
                   onChange={onChange}
                 />
               </div>
-              <div className='input-group'>
-                <label htmlFor='lastName'>Last Name</label>
+              <div className="input-group">
+                <label htmlFor="lastName">Last Name :</label>
                 <input
-                  type='text'
-                  style={{ color: 'black' }}
-                  name='lastName'
-                  id='lastName'
+                  type="text"
+                  style={{ color: "black" }}
+                  name="lastName"
+                  id="lastName"
                   value={lastName}
                   onChange={onChange}
                 />
               </div>
-              <div className='input-group'>
-                <label htmlFor='email'>Email</label>
+              <div className="input-group">
+                <label htmlFor="email">Email :</label>
                 <input
-                  type='text'
-                  id='email'
+                  type="text"
+                  id="email"
                   value={email}
-                  name='email'
+                  name="email"
                   onChange={onChange}
                 />
               </div>
-              <div className='input-group'>
-                <label htmlFor='role'>Role</label>
+              <div className="input-group">
+                <label htmlFor="role">Role :</label>
                 <input
-                  type='text'
-                  id='role'
+                  type="text"
+                  id="role"
                   value={role}
-                  name='role'
+                  name="role"
                   onChange={onChange}
                 />
               </div>
-              <input type='submit' className='submit' value='Update' />
+              <input type="submit" className="submit" value="Update" />
             </form>
           </div>
         )}

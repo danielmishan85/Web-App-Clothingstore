@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import HomeIcon from '@mui/icons-material/Home';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import LogoutIcon from '@mui/icons-material/Logout';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import HomeIcon from "@mui/icons-material/Home";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { Link } from "react-router-dom";
 
-import { auth } from '../../firebase';
-import './NavLinks.css';
-import { getBasketItemAmount } from '../../context/reducer';
-import { useStateValue } from '../../context/stateProvider';
+import { auth } from "../../firebase";
+import "./NavLinks.css";
+import { getBasketItemAmount } from "../../context/reducer";
+import { useStateValue } from "../../context/stateProvider";
 
 const NavLinks = () => {
   const [{ basket }, dispatch] = useStateValue();
@@ -28,13 +28,13 @@ const NavLinks = () => {
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUsetAuth(user);
-        if(user.email === 'danielmishan85@gmail.com') {
-          setIsAdmin(true)
-          console.log(isAdmin)
+        if (user.email === "danielmishan85@gmail.com") {
+          setIsAdmin(true);
+          console.log(isAdmin);
         }
       } else {
         setUsetAuth(null);
-        setIsAdmin(false)
+        setIsAdmin(false);
       }
     });
 
@@ -44,52 +44,50 @@ const NavLinks = () => {
     };
   }, []);
 
-  
-
   const signoutHandler = () => {
     signOut(auth)
       .then(() => {
-        console.log('sign out succesful!');
+        console.log("sign out succesful!");
       })
       .catch((error) => console.log(error));
-    history('/');
+    history("/");
   };
 
   return (
-    <ul className='nav-links'>
+    <ul className="nav-links">
       <li>
-        <NavLink to='/'>
-          <HomeIcon sx={{ fontSize: '50px' }} />
+        <NavLink to="/">
+          <HomeIcon sx={{ fontSize: "50px", color: "black" }} />
         </NavLink>
       </li>
       {userAuth && isAdmin && (
         <li>
           <NavLink to={`/users/Admin`}>
-            <AccountCircleIcon sx={{ fontSize: '50px' }} />
+            <AccountCircleIcon sx={{ fontSize: "50px" }} />
           </NavLink>
         </li>
       )}
       {userAuth && !isAdmin && (
         <li>
           <NavLink to={`/users/profile`}>
-            <AccountCircleIcon sx={{ fontSize: '50px' }} />
+            <AccountCircleIcon sx={{ fontSize: "50px" }} />
           </NavLink>
         </li>
       )}
       {!userAuth && (
         <li>
-          <NavLink to='/login'>
-            <AccountCircleIcon sx={{ fontSize: '50px' }} />
+          <NavLink to="/login">
+            <AccountCircleIcon sx={{ fontSize: "50px" }} />
           </NavLink>
         </li>
       )}
       <li>
-        <Link to='/checkout'>
-          <span className='shoppingcarticon__icon'>
-            <ShoppingCartIcon sx={{ fontSize: '50px' }} />
+        <Link to="/checkout">
+          <span className="shoppingcarticon__icon">
+            <ShoppingCartIcon sx={{ fontSize: "50px" }} />
           </span>
           <span> Your Cart </span>
-          <span className='shopping__amount'>
+          <span className="shopping__amount">
             {getBasketItemAmount(basket)}
           </span>
         </Link>
@@ -98,11 +96,11 @@ const NavLinks = () => {
         <li>
           <button
             style={{
-              border: 'none',
+              border: "none",
             }}
             onClick={signoutHandler}
           >
-            <LogoutIcon sx={{ fontSize: '50px' }} />
+            <LogoutIcon sx={{ fontSize: "50px" }} />
           </button>
         </li>
       )}
