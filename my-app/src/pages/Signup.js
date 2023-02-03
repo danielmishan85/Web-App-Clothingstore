@@ -44,14 +44,28 @@ export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const firstName = data.get('firstName')
+    const lastName = data.get('lastName')
     const email = data.get('email');
     const password = data.get('password');
     const userData = {
-      firstName: data.get('firstName'),
-      lastName: data.get('lastName'),
+      firstName: firstName,
+      lastName: lastName,
       email: email,
       password: password,
     };
+    if (firstName == '') {
+      alert('Enter an email please!');
+    }
+    if (lastName == '') {
+      alert('Enter an email please!');
+    }
+    if (email == '') {
+      alert('Enter an email please!');
+    }
+    if (password == '') {
+      alert('Enter password please!');
+    }
 
     createUserWithEmailAndPassword(auth, email, password)
       .then(async (res) => {

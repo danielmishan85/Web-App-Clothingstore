@@ -44,10 +44,16 @@ export default function Login() {
     const data = new FormData(event.currentTarget);
     const email = data.get('email');
     const password = data.get('password');
+    if (email == '') {
+      alert('Enter an email please!');
+    }
+    if (password == '') {
+      alert('Enter password please!');
+    }
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log('user logged in: ', userCredential)
+        console.log('user logged in: ', userCredential);
       })
       .catch((error) => console.log(error));
 
@@ -110,10 +116,10 @@ export default function Login() {
             >
               Log In
             </Button>
-            <Grid container>
-              <Grid item xs>
+            <Grid container justifyContent='flex-end'>
+              {/* <Grid item xs>
                 <Link to='/passwordReset'>Forgot password?</Link>
-              </Grid>
+              </Grid> */}
               <Grid item>
                 <Link to='/signup'>{"Don't have an account? Sign up"}</Link>
               </Grid>
