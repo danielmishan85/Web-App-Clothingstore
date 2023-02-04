@@ -194,7 +194,7 @@ const getUserByEmail = async (req, res, next) => {
   }
   if (!user) {
     return next(
-      new HttpError('Could not find a user for the provided id.', 404)
+      new HttpError('Could not find a user for the provided email.', 404)
     );
   }
 

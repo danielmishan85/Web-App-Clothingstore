@@ -39,17 +39,6 @@ const MainNavigation = props => {
           <span />
         </button>
         <h1 className='main-navigation__title'>
-          {/* <TextField
-            sx={{ mx: 3 }}
-            className='inputlabal'
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position='start'>
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-          ></TextField> */}
         </h1>
         <nav className="main-navigation__header-nav">
           <NavLinks />

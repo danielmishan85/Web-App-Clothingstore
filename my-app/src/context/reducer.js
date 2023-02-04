@@ -19,6 +19,7 @@ const reducer = (state, action) => {
       console.log("index 2:" + index2);
       if (index2 >= 0) {
         state.basket[index2].amount = state.basket[index2].amount + 1;
+        console.log(state.basket[index2].amount)
         return {
           ...state,
         };

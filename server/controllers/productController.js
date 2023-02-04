@@ -15,6 +15,7 @@ const getAllProducts = async (req, res, next) => {
       new HttpError('Fatching products failed, please try again later.', 500)
     );
   }
+  
   res.json({
     products: products.map((product) => product.toObject({ getters: true })),
   });

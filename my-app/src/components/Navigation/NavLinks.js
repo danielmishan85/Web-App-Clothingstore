@@ -19,12 +19,6 @@ const NavLinks = () => {
   const history = useNavigate();
 
   useEffect(() => {
-    // const getUsers = onSnapshot(collection(db, 'users'), (querySnapshot) => {
-    //   const items = [];
-    //   querySnapshot.forEach((doc) => items.push(doc.data()));
-    //   setUsers(items);
-    // });
-
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUsetAuth(user);
@@ -39,7 +33,6 @@ const NavLinks = () => {
     });
 
     return () => {
-      //getUsers();
       listen();
     };
   }, []);

@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const Order = require('../models/order');
 const User = require('../models/user');
 const Product = require('../models/product');
-const product = require('../models/product');
+
 
 const getAllOrders = async (req, res, next) => {
   let orders;
@@ -55,7 +55,7 @@ const getOrdersByUserEmail = async (req, res, next) => {
 
   if (!orders || orders.length === 0) {
     return next(
-      new HttpError('Could not find orders for the provided user id.', 404)
+      new HttpError('Could not find orders for the provided user email.', 404)
     );
   }
 

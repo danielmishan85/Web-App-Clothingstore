@@ -26,14 +26,8 @@ const editUser = async (email, firstName, lastName, password, role, _id, isEdit)
               res.status(400);
               return {error: "User Already Exist"}
           }
-
-          // const user = await User.create({
-          //     name,
-          //     email,
-          //     userType,
-          //     password:123123,
-          // });
       }
+      //return the update
       const users = await User.find();
       if (users[0]) {
           return { success: users }
@@ -52,7 +46,7 @@ const deleteUser = async (id) => {
       if (users[0]) {
           return { success: users }
       } else {
-          return { error: "No user found" }
+          return { error: "No users found" }
       }
   } catch (e) {
       return { error: e }
