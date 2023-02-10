@@ -54,10 +54,11 @@ export default function Login() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log('user logged in: ', userCredential);
+        if (userCredential) {
+          history('/');
+        }
       })
-      .catch((error) => console.log(error));
-
-    history('/');
+      .catch((error) => alert(error));
   };
 
   return (

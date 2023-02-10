@@ -233,7 +233,7 @@ function AllBrands(props) {
               >
                 <Link
                   style={{ textDecoration: 'none' }}
-                  to={`/products/${item.id}`}
+                  to={`/products/${item._id}`}
                 >
                   <CategoryCard sx={{ margin: 'auto' }} key={i} item={item} />{' '}
                 </Link>
